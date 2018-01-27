@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 48e7dd10bad9f45ff9f31f29c7469c5a
-timeCreated: 1517056179
+guid: 92ce994c4fdf0ea49acddc8a4e81ee50
+timeCreated: 1517059369
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -13,13 +13,7 @@ ModelImporter:
     2300000: default
     3300000: default
     4300000: default
-    6400000: default
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: defaultMat
-    second: {fileID: 2100000, guid: 2ccf0da64f0484fde9b3d37eb13e1a0f, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -51,7 +45,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
