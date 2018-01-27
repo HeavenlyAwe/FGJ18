@@ -27,7 +27,9 @@ public class ReadLevelFromBitmap : MonoBehaviour {
                 //int colorInteger = colorMap[c[x+w*y]];
 				GameObject tmpGO;
 
-                switch((colorMap[c[x+w*y]])) {
+                if(colorMap.ContainsKey(c[x+w*y])) {
+
+                     switch((colorMap[c[x+w*y]])) {
                     case 0:
                         tmpGO = Instantiate(preFabs[0], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
@@ -39,6 +41,13 @@ public class ReadLevelFromBitmap : MonoBehaviour {
                         tmpGO.transform.parent = objectGO[1].transform;
                         break;
                 }
+                } else {
+                        tmpGO = Instantiate(preFabs[0], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                        //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[0].transform;
+                }
+
+               
 					 
 				}
                 }
