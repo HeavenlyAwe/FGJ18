@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Trap
+public class Trap
 {
-    public int id;
+    public int userId;
+    public int trapId;
     public float x;
     public float z;
     public string type;
     public float timer;
+    public bool activated;
 
-    public Trap(int id, float x, float z, string type, float timer)
+    public Trap(int userId, int trapId, float x, float z, string type, float timer)
     {
-        this.id = id;
+        this.userId = userId;
+        this.trapId = trapId;
         this.x = x;
         this.z = z;
         this.type = type;
         this.timer = timer;
+        this.activated = false;
     }
 }
 
@@ -26,7 +30,8 @@ public class Traps : MonoBehaviour {
 
     private float startDelay;
     private List<Trap> placedTraps;
-
+    private List<int> removeTraps;
+    private GameObject player;
 
     public bool enableTrapPlacement = false;
 
@@ -34,8 +39,9 @@ public class Traps : MonoBehaviour {
     void Start () {
         startDelay = 5f;
         placedTraps = new List<Trap>();
-	}
-	
+        removeTraps = new List<int>();
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -43,7 +49,6 @@ public class Traps : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
 
         // countdown to disable placing of traps in a too early stage of the game!
         if(!enableTrapPlacement)
@@ -54,21 +59,70 @@ public class Traps : MonoBehaviour {
                 enableTrapPlacement = true;
             }
         }
-
         for(int idx = 0; idx<placedTraps.Count; idx++) 
         {
             Trap t = placedTraps[idx];
             t.timer -= Time.deltaTime;
-            if(t.timer<0) {
+            if(t.activated && t.timer<0) {
                 // KABOOM!!!!
+                detonateTrap(t, idx);
             }
         }
+        // remove detonated traps
+        //Debug.Log("count: " + removeTraps.Count);
+        for (int idx = 0; idx < removeTraps.Count; idx++)
+        {
+            placedTraps.RemoveAt(removeTraps[idx]);
+        }
+        removeTraps.RemoveRange(0, removeTraps.Count);
 
-	}
+    }
 
-    void placeTrap(int id, float x, float z, string type)
+    void placeTrap(int userId, int trapId, float x, float z, string type)
     {
         float timer = 2f; // should be taken from traptype!
-        placedTraps.Add(new Trap(id, x, z, type, timer));
+        placedTraps.Add(new Trap(userId, trapId, x, z, type, timer));
+    }
+
+    public void detonateTrap(Trap t, int idx)
+    {
+        Vector3 pos = player.transform.position;
+        float dist = (pos - new Vector3(t.x, 0, t.z)).sqrMagnitude;
+        if (dist < 25f)
+        {
+            // Hit by trap
+            Debug.Log("KABOOM");
+            player.GetComponent<MovePlayer>().hitByTrap(t, dist);
+        }
+        // add detonated trap to removelist
+        Debug.Log("REMOVE TRAPS: " + removeTraps.Count);
+        removeTraps.Add(idx);
+
+    }
+
+    public void activateTrap(int userId, int trapId)
+    {
+        for(int idx = 0; idx<placedTraps.Count; idx++)
+        {
+            Trap t = placedTraps[idx];
+            if(t.userId==userId && t.trapId==trapId)
+            {
+                t.activated = true;
+            }
+        }
+    }
+
+    public void getPlayerGO()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // make some dummytraps:
+        placedTraps.Add(new global::Trap(111, 0, 3, 3, "test", 1f));
+        activateTrap(111, 0);
+        placedTraps.Add(new global::Trap(111, 1, 5, 5, "test", 2f));
+        activateTrap(111, 1);
+        placedTraps.Add(new global::Trap(111, 2, 2, 2, "test", 3f));
+        activateTrap(111, 2);
+        Debug.Log("Traps Placed");
     }
 }
