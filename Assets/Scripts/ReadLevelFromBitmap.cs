@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ReadLevelFromBitmap : MonoBehaviour {
-
-    public GameObject floor;
-    public GameObject wall;
-    public GameObject floorGOs;
-    public GameObject wallGOs;
-
-    private Color32 cWhite = new Color32(255, 255, 255, 255);
+	public Dictionary<Color32, int> colorMap = new Dictionary<Color32, int>();
+	public GameObject[] preFabs = new GameObject[10];
+	public GameObject[] objectGO = new GameObject[10];
 
     // Use this for initialization
     void Start () {
+        colorMap.Add(new Color32(255, 255, 255, 255),0);
+        colorMap.Add(new Color32(0, 0, 0, 255),1);
+
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Texture2D tex = sr.sprite.texture;
 
@@ -25,20 +24,26 @@ public class ReadLevelFromBitmap : MonoBehaviour {
         {
             for( int y = 0; y<h; y++)
             {
-                if (c[x+w*y].Equals(cWhite))
-                {
-					GameObject tmpGO = Instantiate(floor, new Vector3((float)(0.2*x), 0, (float)(0.2*y)), Quaternion.identity);
-                    tmpGO.transform.parent = floorGOs.transform;
-                }
-                else {
-					GameObject tmpGO = Instantiate(wall, new Vector3((float)(x*0.2), -0.5f , (float)(y*0.2)), Quaternion.identity);
-                    tmpGO.transform.parent = wallGOs.transform;
-                }
-                
-            }
-        }
-        sr.enabled = false;
+                //int colorInteger = colorMap[c[x+w*y]];
+				GameObject tmpGO;
 
+                switch((colorMap[c[x+w*y]])) {
+                    case 0:
+                        tmpGO = Instantiate(preFabs[0], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                        //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[0].transform;
+                        break;
+
+                    case 1:
+                        tmpGO = Instantiate(preFabs[1], new Vector3((float)(x*0.2), -0.5f , (float)(y*0.2)), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[1].transform;
+                        break;
+                }
+					 
+				}
+                }
+            
+        sr.enabled = false;
     }
 
     // Update is called once per frame
