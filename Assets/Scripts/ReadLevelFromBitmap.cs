@@ -32,7 +32,7 @@ public class ReadLevelFromBitmap : MonoBehaviour {
                     tmpGO.transform.parent = floorGOs.transform;
                 }
                 else {
-                    GameObject tmpGO = Instantiate(wall, new Vector3(x, 0, y), Quaternion.identity);
+					GameObject tmpGO = Instantiate(wall, new Vector3(x, (float)(5.2) , y), Quaternion.Euler(-90,0,0));
                     tmpGO.transform.parent = wallGOs.transform;
                 }
                 
