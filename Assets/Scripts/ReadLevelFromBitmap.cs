@@ -29,7 +29,6 @@ public class ReadLevelFromBitmap : MonoBehaviour {
 			
 
                 if(colorMap.ContainsKey(c[x+w*y])) {
-					Debug.Log ("Key: " + colorMap.ContainsKey (c [x + w * y]));
                      switch((colorMap[c[x+w*y]])) {
                     case 0:
                         tmpGO = Instantiate(preFabs[0], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
