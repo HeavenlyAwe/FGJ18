@@ -28,6 +28,8 @@ public class MovePlayer : MonoBehaviour {
         bitmapHeight = levelBitmap.texture.height;
         bitmapColors = levelBitmap.texture.GetPixels32();
 
+        Debug.Log("HEJ");
+
     }
 
     // Update is called once per frame
@@ -47,10 +49,9 @@ public class MovePlayer : MonoBehaviour {
         int iz = (int)pos.z;
 
         Vector3 rot = transform.rotation.eulerAngles;
-        // Debug.Log(rot);
+        Debug.Log(rot);
         if (rot.y >= 0 && rot.y < 90)
         {
-            // Debug.Log(isFloor(ix, iz - 1));
             if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz + 1) && isFloor(ix, iz + 1))
             {
                 transform.position = pos;

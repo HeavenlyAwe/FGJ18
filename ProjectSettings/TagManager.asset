@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - players
+  - Server
+  - PlayersConnected
+  - CollectPlayers
+  - MobilePlayersHeader
   layers:
   - Default
   - TransparentFX

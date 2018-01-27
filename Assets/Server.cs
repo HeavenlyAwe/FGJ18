@@ -12,7 +12,7 @@ public class ServerClient {
 
 public class Server : MonoBehaviour {
 
-    private const int MAX_CONNECTION = 100;
+    private const int MAX_CONNECTION = 8;
 
     private int port = 5701;
 
@@ -26,10 +26,19 @@ public class Server : MonoBehaviour {
 
     private byte error;
 
-    private List<ServerClient> clientList;
+    private CollectPlayers collectPlayers;
+
+    public List<ServerClient> clientList;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
     // Use this for initialization
     void Start() {
+        collectPlayers = GameObject.FindGameObjectWithTag("CollectPlayers").GetComponent<CollectPlayers>();
+
         NetworkTransport.Init();
         ConnectionConfig config = new ConnectionConfig();
 
@@ -46,6 +55,13 @@ public class Server : MonoBehaviour {
         Debug.Log("Server Started: " + hostId + " : " + webHostId);
 
         clientList = new List<ServerClient>();
+
+        // insert dummy
+        ServerClient serverClient = new ServerClient();
+        serverClient.connectionId = 1234;
+        serverClient.playerName = collectPlayers.getRandomName(); // "TEMP";
+        clientList.Add(serverClient);
+
     }
 
     // Update is called once per frame
@@ -100,7 +116,7 @@ public class Server : MonoBehaviour {
         // Add the player to a list
         ServerClient serverClient = new ServerClient();
         serverClient.connectionId = connectionId;
-        serverClient.playerName = "TEMP";
+        serverClient.playerName = collectPlayers.getRandomName(); // "TEMP";
 
         clientList.Add(serverClient);
 
@@ -155,5 +171,14 @@ public class Server : MonoBehaviour {
         }
     }
 
+    public List<ServerClient> getClients()
+    {
+        return clientList;
+    }
+
+    public int getClientCount()
+    {
+        return clientList.Count;
+    }
 
 }
