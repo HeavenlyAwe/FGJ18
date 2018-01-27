@@ -6,7 +6,6 @@ public class ReadLevelFromBitmap : MonoBehaviour {
 
     public GameObject floor;
     public GameObject wall;
-
     public GameObject floorGOs;
     public GameObject wallGOs;
 
