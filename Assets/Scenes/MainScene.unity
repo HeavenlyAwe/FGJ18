@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -495,6 +495,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02558186623e40b68d207220143b94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - name: MenuIn
+    clip: {fileID: 8300000, guid: 91d379adec49e4cac98dd65613b41ab8, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuLoop
+    clip: {fileID: 8300000, guid: 9fe3f937eb8a44f3ba904c4785982e82, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &1556454289
 Transform:
   m_ObjectHideFlags: 0
