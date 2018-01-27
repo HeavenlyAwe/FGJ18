@@ -33,7 +33,20 @@ public class AudioManager : MonoBehaviour
 	}
 
 	void Start() {
-		Play ("Main");
+		PlayMainMenuThemes();
+	}
+
+	void PlayMainMenuThemes() {
+		Sound menuIn = Array.Find(sounds, item => item.name == "MenuIn");
+		Sound menuLoop = Array.Find(sounds, item => item.name == "MenuLoop");
+		if (menuIn == null || menuLoop == null)
+		{
+			Debug.LogWarning("Sounds for main menu theme not found!");
+			return;
+		}
+
+		menuIn.source.Play();
+		menuLoop.source.PlayScheduled (AudioSettings.dspTime + menuIn.clip.length);
 	}
 
 	public void Play(string sound)
