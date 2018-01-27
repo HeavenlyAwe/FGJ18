@@ -71,6 +71,13 @@ public class Client : MonoBehaviour {
         playerDictionary = new Dictionary<int, ClientPlayer>();
     }
 
+    public void PlaceTrap() {
+        string trapType = "bomb";
+        Vector3 position = new Vector3(0, 0, 0);
+        Send("CLIENT_PLACE_TRAP|" + trapType + "|" + position.x + "%" + position.z, reliableChannel);
+    }
+
+
     // Update is called once per frame
     void Update() {
         if (!isConnected) {
@@ -114,6 +121,10 @@ public class Client : MonoBehaviour {
                 //case NetworkEventType.DisconnectEvent: //4
                 //    break;
         }
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
+            Debug.Log(Input.GetTouch(0).position);
+        }
     }
 
 
@@ -124,7 +135,7 @@ public class Client : MonoBehaviour {
         clientId = int.Parse(data[1]);
 
         // Send the name to the Server
-        SendMessage("CLIENT_NAME|" + playerName, reliableChannel);
+        Send("CLIENT_NAME|" + playerName, reliableChannel);
 
         // Create all other players
         for (int i = 2; i < data.Length - 1; i++) {
@@ -153,7 +164,7 @@ public class Client : MonoBehaviour {
         playerDictionary.Remove(connectionId);
     }
 
-    private void SendMessage(string message, int channelId) {
+    private void Send(string message, int channelId) {
         Debug.Log("Sending message: " + message);
         byte[] messageBuffer = Encoding.Unicode.GetBytes(message);
         NetworkTransport.Send(hostId, connectionId, channelId, messageBuffer, message.Length * sizeof(char), out error);

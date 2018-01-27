@@ -80,6 +80,9 @@ public class Server : MonoBehaviour {
                     case "CLIENT_NAME":
                         OnClientName(connectionId, commandParts[1]);
                         break;
+                    case "CLIENT_PLACE_TRAP":
+                        OnClientPlaceTrap(connectionId, commandParts[1], commandParts[2].Split('%'));
+                        break;
                     default:
                         Debug.Log("Invalid command : " + message);
                         break;
@@ -120,6 +123,24 @@ public class Server : MonoBehaviour {
         SendMessage("CLIENT_DISCONNECTED|" + connectionId, reliableChannel, clientList);
     }
 
+
+    private void OnClientName(int connectionId, string playerName) {
+        // Link playerName to connectionId
+
+        clientList.Find(x => x.connectionId == connectionId).playerName = playerName;
+
+        // Tell everybody that a new player has connected
+        SendMessage("CLIENT_CONNECTED|" + playerName + "|" + connectionId, reliableChannel, clientList);
+    }
+
+
+    private void OnClientPlaceTrap(int connectionId, string trapType, string[] data) {
+        Debug.Log("Player: " + connectionId + " is placing [" + trapType + "]");
+        float x = float.Parse(data[0]);
+        float z = float.Parse(data[1]);
+    }
+
+
     private void SendMessage(string message, int channelId, int connectionId) {
         List<ServerClient> clients = new List<ServerClient>();
         clients.Add(clientList.Find(x => x.connectionId == connectionId));
@@ -135,12 +156,4 @@ public class Server : MonoBehaviour {
     }
 
 
-    private void OnClientName(int connectionId, string playerName) {
-        // Link playerName to connectionId
-
-        clientList.Find(x => x.connectionId == connectionId).playerName = playerName;
-
-        // Tell everybody that a new player has connected
-        SendMessage("CLIENT_CONNECTED|" + playerName + "|" + connectionId, reliableChannel, clientList);
-    }
 }
