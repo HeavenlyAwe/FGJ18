@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 1907187422989294, guid: 1ea0612d333edbd41b186058b2438bfa, type: 2}
-  wall: {fileID: 1924695470476706, guid: 2d9f024c5ef1b6942a8d2cc723537554, type: 2}
+  wall: {fileID: 100000, guid: 0236d6c9f24bf4d829a7c2d7e31507d4, type: 3}
   floorGOs: {fileID: 2125629912}
   wallGOs: {fileID: 1368160785}
 --- !u!1 &633561619
@@ -307,7 +307,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 633561619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 10, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1673648162}
@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368160786}
   m_Layer: 0
-  m_Name: wallGOS
+  m_Name: wallGOs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
