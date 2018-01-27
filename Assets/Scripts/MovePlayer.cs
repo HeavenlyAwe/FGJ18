@@ -28,6 +28,8 @@ public class MovePlayer : MonoBehaviour {
         bitmapHeight = levelBitmap.texture.height;
         bitmapColors = levelBitmap.texture.GetPixels32();
 
+        Debug.Log("HEJ");
+
     }
 
     // Update is called once per frame
