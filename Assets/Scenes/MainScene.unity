@@ -710,15 +710,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e79b8c08c1a45c4a4b84e1379a82bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: MenuIn
+    clip: {fileID: 8300000, guid: 91d379adec49e4cac98dd65613b41ab8, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuLoop
+    clip: {fileID: 8300000, guid: 9fe3f937eb8a44f3ba904c4785982e82, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: LowIntensity
+    clip: {fileID: 8300000, guid: 28b0c687e8b904555a0ecd5c12b6d742, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MediumIntensity
+    clip: {fileID: 8300000, guid: d93fdea723e3c45388f7ec4921398fb9, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: HighIntensity
+    clip: {fileID: 8300000, guid: e988f9bf1bd3442f4a7d510bd78669e4, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: CountdownIntensity
+    clip: {fileID: 8300000, guid: 46fbd52db2e2b4e3cbdafcc2703d1478, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &1556454289
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1556454287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
