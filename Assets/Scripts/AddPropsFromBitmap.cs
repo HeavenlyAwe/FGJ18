@@ -24,6 +24,8 @@ public class AddPropsFromBitmap : MonoBehaviour {
 
 				GameObject tmpGO;
 
+				if (colorMap.ContainsKey(c[x+w*y])) {
+
                 switch((colorMap[c[x+w*y]])) {
                     case 0:
                         //tmpGO = Instantiate(preFabs[0], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
@@ -36,8 +38,11 @@ public class AddPropsFromBitmap : MonoBehaviour {
                         break;
                 }
 
+			} else {
+				
 			}
 
+		}
 		}
 		
 		sr.enabled = false;
