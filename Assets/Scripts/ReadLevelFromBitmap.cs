@@ -27,11 +27,11 @@ public class ReadLevelFromBitmap : MonoBehaviour {
             {
                 if (c[x+w*y].Equals(cWhite))
                 {
-                    GameObject tmpGO = Instantiate(floor, new Vector3(x, 0, y), Quaternion.identity);
+					GameObject tmpGO = Instantiate(floor, new Vector3((float)(0.2*x), 0, (float)(0.2*y)), Quaternion.identity);
                     tmpGO.transform.parent = floorGOs.transform;
                 }
                 else {
-					GameObject tmpGO = Instantiate(wall, new Vector3(x, (float)(5.2) , y), Quaternion.Euler(-90,0,0));
+					GameObject tmpGO = Instantiate(wall, new Vector3((float)(x*0.2), -0.5f , (float)(y*0.2)), Quaternion.identity);
                     tmpGO.transform.parent = wallGOs.transform;
                 }
                 

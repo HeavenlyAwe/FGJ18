@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 1907187422989294, guid: 1ea0612d333edbd41b186058b2438bfa, type: 2}
-  wall: {fileID: 100000, guid: 0236d6c9f24bf4d829a7c2d7e31507d4, type: 3}
+  wall: {fileID: 100002, guid: 48e7dd10bad9f45ff9f31f29c7469c5a, type: 3}
   floorGOs: {fileID: 2125629912}
   wallGOs: {fileID: 1368160785}
 --- !u!1 &633561619
@@ -307,7 +307,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 633561619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0.1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1673648162}
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c76f0799672fa4aa5ed1667152ef96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 2
   rotSpeed: 50
   angle: 0
 --- !u!136 &1673648164
