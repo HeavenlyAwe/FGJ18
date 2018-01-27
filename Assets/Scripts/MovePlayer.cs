@@ -19,6 +19,10 @@ public class MovePlayer : MonoBehaviour {
     private Color32[] bitmapColors;
     private Color32 cFloor = new Color32(255, 255, 255, 255);
 
+
+    private bool enableMovement = true;
+    private float trapHitCountdown;
+
     // Use this for initialization
     void Start () {
         lvlController = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelController>();
@@ -28,7 +32,8 @@ public class MovePlayer : MonoBehaviour {
         bitmapHeight = levelBitmap.texture.height;
         bitmapColors = levelBitmap.texture.GetPixels32();
 
-        Debug.Log("HEJ");
+        // Now the player object is available, get a reference to the gameobject in Traps-script
+        GameObject.FindGameObjectWithTag("Traps").GetComponent<Traps>().getPlayerGO();
 
     }
 
@@ -48,34 +53,45 @@ public class MovePlayer : MonoBehaviour {
         int ix = (int)pos.x;
         int iz = (int)pos.z;
 
-        Vector3 rot = transform.rotation.eulerAngles;
-        Debug.Log(rot);
-        if (rot.y >= 0 && rot.y < 90)
+        if (enableMovement)
         {
-            if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz + 1) && isFloor(ix, iz + 1))
+            Vector3 rot = transform.rotation.eulerAngles;
+            if (rot.y >= 0 && rot.y < 90)
             {
-                transform.position = pos;
+                if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz + 1) && isFloor(ix, iz + 1))
+                {
+                    transform.position = pos;
+                }
             }
-        }
-        if (rot.y >= 90 && rot.y < 180)
-        {
-            if (isFloor(ix - 1, iz) && isFloor(ix - 1, iz + 1) && isFloor(ix, iz + 1))
+            if (rot.y >= 90 && rot.y < 180)
             {
-                transform.position = pos;
+                if (isFloor(ix - 1, iz) && isFloor(ix - 1, iz + 1) && isFloor(ix, iz + 1))
+                {
+                    transform.position = pos;
+                }
             }
-        }
-        if (rot.y >= 180 && rot.y < 270)
-        {
-            if (isFloor(ix - 1, iz) && isFloor(ix - 1, iz - 1) && isFloor(ix, iz - 1))
+            if (rot.y >= 180 && rot.y < 270)
             {
-                transform.position = pos;
+                if (isFloor(ix - 1, iz) && isFloor(ix - 1, iz - 1) && isFloor(ix, iz - 1))
+                {
+                    transform.position = pos;
+                }
             }
-        }
-        if (rot.y >= 270 && rot.y < 360)
-        {
-            if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz - 1) && isFloor(ix, iz - 1))
+            if (rot.y >= 270 && rot.y < 360)
             {
-                transform.position = pos;
+                if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz - 1) && isFloor(ix, iz - 1))
+                {
+                    transform.position = pos;
+                }
+            }
+        } else
+        {
+            // movement not enabled.
+            trapHitCountdown -= Time.deltaTime;
+            if(trapHitCountdown<0)
+            {
+                enableMovement = true;
+                GameObject.FindGameObjectWithTag("PlayerStopMarker").GetComponent<MeshRenderer>().enabled = false;
             }
         }
 
@@ -99,4 +115,13 @@ public class MovePlayer : MonoBehaviour {
         return cFloor.Equals(bitmapColors[x + z * bitmapWidth]);
     }
 
+    public void hitByTrap(Trap t, float dist)
+    {
+        Debug.Log("REMOVE-MovePlayer");
+        // get properties of the trap for use!!!
+        enableMovement = false;
+        GameObject.FindGameObjectWithTag("PlayerStopMarker").GetComponent<MeshRenderer>().enabled = true;
+        trapHitCountdown = .5f; // dist; // is this right??? - propably not...
+
+    }
 }
