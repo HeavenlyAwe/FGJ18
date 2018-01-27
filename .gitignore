@@ -35,4 +35,5 @@ sysinfo.txt
 
 
 ProjectSettings/ProjectVersion.txt
-
+.DS_Store
+.blend1
