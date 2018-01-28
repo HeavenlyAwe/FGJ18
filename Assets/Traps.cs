@@ -89,7 +89,9 @@ public class Traps : MonoBehaviour {
     public void detonateTrap(Trap t, int idx)
     {
         Vector3 pos = player.transform.position;
-        float dist = (pos - new Vector3(t.x, 0, t.z)).sqrMagnitude;
+        Vector3 tPos = new Vector3(t.x, 0, t.z);
+        FindObjectOfType<AudioManager>().PlayFromLocation("BombExplosion", tPos);
+        float dist = (pos - tPos).sqrMagnitude;
         if (dist < 25f)
         {
             // Hit by trap
@@ -108,6 +110,8 @@ public class Traps : MonoBehaviour {
             if(t.userId==userId && t.trapId==trapId)
             {
                 t.activated = true;
+                FindObjectOfType<AudioManager>().PlayFromLocation("BombBeeps", new Vector3(t.x,0,t.z));
+
             }
         }
     }

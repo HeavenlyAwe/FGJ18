@@ -45,6 +45,10 @@ public class MovePlayer : MonoBehaviour {
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
 
+        if (vert != 0) {
+            FindObjectOfType<AudioManager>().Play("FootSteps");
+        }
+
         angle = horiz * rotSpeed * Time.deltaTime;
 
         transform.Rotate(new Vector3(0f, 1f, 0f), angle);

@@ -20,6 +20,7 @@ public class ObjectiveScript : MonoBehaviour {
 			//Remove vial object from sight
 			VialAcquiredImage.enabled = true;
 			IsPickedUp = true;
+			FindObjectOfType<AudioManager>().Play("CollectVial");
 		}
 	}
 
