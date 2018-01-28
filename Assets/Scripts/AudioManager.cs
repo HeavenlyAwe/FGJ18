@@ -5,21 +5,12 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
 
-	public static AudioManager instance;
+	public bool isAudioManagerForMenu;
 
 	public Sound[] sounds;
 
 	public void Awake()
 	{
-		if (instance != null)
-		{
-			Destroy(gameObject);
-		}
-		else
-		{
-			instance = this;
-			DontDestroyOnLoad(gameObject);
-		}
 
 		foreach (Sound s in sounds)
 		{
@@ -33,12 +24,19 @@ public class AudioManager : MonoBehaviour
 	}
 
 	public void Start() {
-		StartGameMusic();
+		if (isAudioManagerForMenu) {
+			PlayMainMenuThemes();
+		} else {
+			StartGameMusic();
+		}
 	}
 
 	public void Update() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			IntensifyGameThemeByTrap ();
+		}
+		if (Input.GetKeyDown(KeyCode.T)) {
+			IntensifyGameThemeByTimer ();
 		}
 	}
 
@@ -52,13 +50,11 @@ public class AudioManager : MonoBehaviour
 		}
 
 		menuIn.source.Play();
-		menuLoop.source.PlayScheduled (AudioSettings.dspTime + menuIn.clip.length);
+		// plus 0.058s was only for own performance issues, reason hasn't been checked
+		menuLoop.source.PlayScheduled (AudioSettings.dspTime + menuIn.clip.length + 0.058f);
 	}
 
 	public void StartGameMusic() {
-		Stop ("MenuIn");
-		Stop ("MenuLoop");
-
 		Sound low = GetSound("LowIntensity");
 		if (low == null)
 		{
@@ -97,6 +93,21 @@ public class AudioManager : MonoBehaviour
 			low.source.SetScheduledEndTime(AudioSettings.dspTime + remainder);
 		}
 	}
+
+	public void IntensifyGameThemeByTimer() {
+		Sound countdown = GetSound("CountdownIntensity");
+
+		if (countdown == null)
+		{
+			Debug.LogWarning("Sounds for countdown game theme not found!");
+			return;
+		}
+		Stop("LowIntensity");
+		Stop("MediumIntensity");
+		Stop("HighIntensity");
+
+		countdown.source.Play();
+		}
 
 	private void Play(string sound)
 	{
