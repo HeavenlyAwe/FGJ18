@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class CeilingScript : MonoBehaviour {
 
-	public Dictionary<Color32, int> colorMap = new Dictionary<Color32, int>();
-	public GameObject[] preFabs = new GameObject[10];
-	public GameObject[] objectGO = new GameObject[10];
+
+	//public Dictionary<Color32, int> colorMap = new Dictionary<Color32, int>();
+	public GameObject[] preFabs = new GameObject[16];
+	public GameObject[] objectGO = new GameObject[16];
 
     // Use this for initialization
 
     void Start () {
-        colorMap.Add(new Color32(255, 255, 255, 255),0);     //white
-        colorMap.Add(new Color32(0, 0, 0, 255),1);          //black
-        colorMap.Add(new Color32(255, 20, 148, 255),2);     //pink
+        //colorMap.Add(new Color32(255, 255, 255, 255),0);     //white
+       // colorMap.Add(new Color32(0, 0, 0, 255),0);          //tapet+panel
+       // colorMap.Add(new Color32(0, 0, 255, 255),1);     //kakel
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Texture2D tex = sr.sprite.texture;
@@ -34,22 +35,20 @@ public class CeilingScript : MonoBehaviour {
 
                 //Debug.Log("HEJ");
                 //Debug.Log("COLOR: "+ c[x+w*y]);
+                int index = (int)(c[x+w*y].r / 16);
 
-                if(colorMap.ContainsKey(c[x+w*y])) {
+                Debug.Log(index);
+                //Debug.Log(preFabs(index));
 
-                    int colorInteger = colorMap[c[x+w*y]];
-
-                    tmpGO = Instantiate(preFabs[colorInteger], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
-                    //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                    tmpGO.transform.parent = objectGO[colorInteger].transform;
-                        
+                if(index < 2) {
+                        tmpGO = Instantiate(preFabs[index], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                        //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[index].transform;
                 } else {
-                    tmpGO = Instantiate(preFabs[0], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                    //tmpGO = Instantiate(preFabs[3], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                    tmpGO.transform.parent = objectGO[0].transform;
+                    //tmpGO.transform.parent = objectGO[3].transform;
                 }
-
-               
 					 
 			}
         }
