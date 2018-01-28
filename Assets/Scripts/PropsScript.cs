@@ -44,9 +44,9 @@ public class PropsScript : MonoBehaviour {
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                         tmpGO.transform.parent = objectGO[0].transform;
                 } else if (index == 1) {
-                        tmpGO = Instantiate(preFabs[1], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                        //tmpGO = Instantiate(preFabs[1], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                        tmpGO.transform.parent = objectGO[1].transform;
+                        //tmpGO.transform.parent = objectGO[1].transform;
                 } else if (index < 6) {
                     tmpGO = Instantiate(preFabs[index], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
