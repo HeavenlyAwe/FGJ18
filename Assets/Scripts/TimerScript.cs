@@ -13,6 +13,8 @@ public class TimerScript : MonoBehaviour {
 	public Text timeShown;
 
     private GameObject endScreen;
+	private float nextInstensify; 
+	private const float delaybetweenIntesifies = 30; 
 
 	private bool musicIntensified = false;
 
@@ -23,6 +25,7 @@ public class TimerScript : MonoBehaviour {
 		timeShown.text =  minutes + countdownString + seconds;
         endScreen = GameObject.FindGameObjectWithTag("EndGameScreen");
         endScreen.SetActive(false);
+		nextInstensify = timeLeft - delaybetweenIntesifies;
 	}
 	
 	// Update is called once per frame
@@ -40,10 +43,14 @@ public class TimerScript : MonoBehaviour {
             //Destroy(this);
             gameObject.SetActive(false);
 		}
+
 		
 		if (timeLeft <= 30f && !musicIntensified) {
-			FindObjectOfType<AudioManager>().IntensifyGameThemeByTimer();
+			FindObjectOfType<AudioManager> ().IntensifyGameThemeByTimer ();
 			musicIntensified = true;
+		} else if (timeLeft <= nextInstensify) {
+			nextInstensify = timeLeft - delaybetweenIntesifies;
+			FindObjectOfType<AudioManager> ().IntensifyGameThemeByTrap ();
 		}
 	}
 

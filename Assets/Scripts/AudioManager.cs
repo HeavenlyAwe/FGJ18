@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 
 	public bool isAudioManagerForMenu;
 	private int numberOfTrapsDetonated; 
-	private const int numberoftrapsbetweenDetonations = 1; 
+	private const int numberoftrapsbetweenDetonations = 5; 
 
 	public Sound[] sounds;
 
