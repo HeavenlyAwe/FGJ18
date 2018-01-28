@@ -39,10 +39,9 @@ public class TimerScript : MonoBehaviour {
 		
 		if (timeLeft < 0f) {
 			timeShown.text = "0:00";
+            // endScreen.SetActive(true);
             endScreen.SetActive(true);
-            //Destroy(this);
-            gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("EndGameScreen").GetComponent<EndGame>().loseGame();
+            endScreen.GetComponent<EndGame>().loseGame();
 		}
 
 		

@@ -1270,6 +1270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalPosition: {x: 6, y: 0, z: 6}
   player: {fileID: 1673648162}
+  endGameScreens: {fileID: 793454089}
   missions:
   - {fileID: 1678123062}
   goalDistance: 1

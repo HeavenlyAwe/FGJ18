@@ -8,11 +8,12 @@ public class GetOutObjectiveScript : ObjectiveMission {
     public Vector3 goalPosition;
     public Transform player;
 
+    public GameObject endGameScreens;
+
     public ObjectiveMission[] missions;
 
     public float goalDistance = 1.0f;
-
-	
+    	
 	// Update is called once per frame
 	void Update () {
         bool done = true;
@@ -28,7 +29,9 @@ public class GetOutObjectiveScript : ObjectiveMission {
 		if (Vector3.Distance(goalPosition, player.position) <= goalDistance) {
             SetDone(true);
             GetComponent<Image>().enabled = true;
-            // GameObject.FindGameObjectWithTag("EndGameScreen").GetComponent<EndGame>().winGame();
+
+            endGameScreens.SetActive(true);
+            endGameScreens.GetComponent<EndGame>().winGame();
         }
 	}
 }
