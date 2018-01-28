@@ -85,7 +85,7 @@ public class Traps : MonoBehaviour {
         float timer = 2f; // should be taken from traptype!
         placedTraps.Add(new Trap(userId, trapId, x, z, type, timer));
 
-        Instantiate(trapGO, new Vector3(x, 2, z), Quaternion.identity);
+        // Instantiate(trapGO, new Vector3(x, 2, z), Quaternion.identity);
     }
 
     public void detonateTrap(Trap t, int idx)
@@ -119,17 +119,17 @@ public class Traps : MonoBehaviour {
         Debug.Log("GO");
         player = GameObject.FindGameObjectWithTag("Player");
 
-        // make some dummytraps:
-        placedTraps.Add(new global::Trap(111, 0, 3, 3, "test", 1f));
-        activateTrap(111, 0);
-        placedTraps.Add(new global::Trap(111, 1, 5, 5, "test", 2f));
-        //activateTrap(111, 1);
-        placedTraps.Add(new global::Trap(111, 2, 2, 2, "test", 3f));
-        //activateTrap(111, 2);
-        Debug.Log("Traps Placed");
-        foreach(Trap t in placedTraps)
-        {
-            Instantiate(trapGO, new Vector3(t.x, 2, t.z), Quaternion.identity);
-        }
+        //// make some dummytraps:
+        //placedTraps.Add(new global::Trap(111, 0, 3, 3, "test", 1f));
+        //activateTrap(111, 0);
+        //placedTraps.Add(new global::Trap(111, 1, 5, 5, "test", 2f));
+        ////activateTrap(111, 1);
+        //placedTraps.Add(new global::Trap(111, 2, 2, 2, "test", 3f));
+        ////activateTrap(111, 2);
+        //Debug.Log("Traps Placed");
+        //foreach(Trap t in placedTraps)
+        //{
+        //    Instantiate(trapGO, new Vector3(t.x, 2, t.z), Quaternion.identity);
+        //}
     }
 }
