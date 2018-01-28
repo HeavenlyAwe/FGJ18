@@ -8,7 +8,10 @@ public class BombHandler : MonoBehaviour {
     public RectTransform[] bombSlots;
     public BombStates bombStatesPrefab;
 
+    public LoadMazeFromBitmap maze;
     public RectTransform gamePanel;
+
+    private Client clientScript;
 
     private BombStates[] bombs;
 
@@ -25,6 +28,11 @@ public class BombHandler : MonoBehaviour {
 
             bombSlots[i].GetComponent<Image>().sprite = bombStatesPrefab.bombUnplaced;
         }
+
+        GameObject go = GameObject.Find("Client");
+        if (go != null) {
+            clientScript = go.GetComponent<Client>();
+        }
     }
 
     // Update is called once per frame
@@ -35,12 +43,10 @@ public class BombHandler : MonoBehaviour {
         Vector2 screenPoint = new Vector2(mousePosition.x, mousePosition.y);
 
         if (dragBomb != null) {
-            Debug.Log(screenMousePosition + " : " + mousePosition + " : " + screenPoint);
-            dragBomb.transform.localPosition = Vector3.zero;
             dragBomb.transform.position = new Vector3(mousePosition.x, mousePosition.y, -10);
             Vector3 localPos = dragBomb.transform.localPosition;
             dragBomb.transform.localPosition = new Vector3(localPos.x, localPos.y, -10);
-            // dragBomb.transform.localPosition = screenMousePosition;
+            Debug.Log(dragBomb.transform.localPosition);
         }
 
         if (Input.GetMouseButtonDown(0)) {
@@ -52,7 +58,7 @@ public class BombHandler : MonoBehaviour {
         } else if (Input.GetMouseButtonUp(0)) {
             if (dragBomb != null) {
                 if (RectTransformUtility.RectangleContainsScreenPoint(gamePanel, screenPoint)) {
-                    PlaceBomb();
+                    PlaceBomb(bombs[currentBombSlot]);
                 } else {
                     bombSlots[currentBombSlot].GetComponent<Image>().sprite = bombs[currentBombSlot].bombUnplaced;
                     bombs[currentBombSlot].gameObject.SetActive(false);
@@ -73,15 +79,22 @@ public class BombHandler : MonoBehaviour {
             dragBomb.GetComponent<RectTransform>().anchorMin = new Vector2(0, 1);
 
             bombSlots[i].GetComponent<Image>().sprite = bombs[i].bombUsed;
+        } else if (bombs[i].IsPlaced() && !bombs[i].IsActivated()) {
+            clientScript.ActivateTrap(i);
+            bombs[i].Activate();
         }
     }
 
-    private void PlaceBomb() {
-        dragBomb.Place();
+    private void PlaceBomb(BombStates bomb) {
+        bomb.Place();
         // currentBombSlot = -1;
 
-        float x = (dragBomb.transform.localPosition.x + 50 / gamePanel.rect.width);
-        float y = (dragBomb.transform.localPosition.y + 50 / gamePanel.rect.height);
+        float x = bomb.transform.localPosition.x / gamePanel.rect.width * maze.GetWidth() * 0.2f;
+        float y = bomb.transform.localPosition.y / gamePanel.rect.height * maze.GetHeight() * 0.2f;
+
+        Debug.Log("Bomb location: " + x + " : " + y);
+
+        clientScript.PlaceTrap(x, y, currentBombSlot);
 
         dragBomb = null;
     }
