@@ -76,10 +76,9 @@ public class Client : MonoBehaviour {
         playerDictionary = new Dictionary<int, ClientPlayer>();
     }
 
-    public void PlaceTrap() {
+    public void PlaceTrap(int x, int y) {
         string trapType = "bomb";
-        Vector3 position = new Vector3(0, 0, 0);
-        Send("CLIENT_PLACE_TRAP|" + trapType + "|" + position.x + "%" + position.z, reliableChannel);
+        Send("CLIENT_PLACE_TRAP|" + trapType + "|" + x + "%" + y, reliableChannel);
     }
 
 
@@ -118,6 +117,9 @@ public class Client : MonoBehaviour {
                     case "CLIENT_DISCONNECTED":
                         OnClientPlayerDisconnected(int.Parse(commandParts[1]));
                         break;
+                    case "START_GAME":
+                        OnStartGame();
+                        break;
                     default:
                         Debug.Log("Invalid command : " + message);
                         break;
@@ -155,7 +157,6 @@ public class Client : MonoBehaviour {
         if (this.connectionId == connectionId) {
             GameObject.Find("Canvas").SetActive(false);
             isStarted = true;
-            SceneManager.LoadScene("PhoneGameplayScene");
         }
 
         ClientPlayer player = new ClientPlayer();
@@ -165,10 +166,14 @@ public class Client : MonoBehaviour {
         playerDictionary.Add(connectionId, player);
     }
 
-
     private void OnClientPlayerDisconnected(int connectionId) {
         playerDictionary.Remove(connectionId);
     }
+
+    private void OnStartGame() {
+        SceneManager.LoadScene("PhoneGameplayScene");
+    }
+
 
     private void Send(string message, int channelId) {
         Debug.Log("Sending message: " + message);

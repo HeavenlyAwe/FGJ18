@@ -128,7 +128,7 @@ public class Server : MonoBehaviour {
         }
         message = message.Trim('|');
 
-        SendMessage(message, reliableChannel, connectionId);
+        Send(message, reliableChannel, connectionId);
     }
 
     private void OnDisconnection(int connectionId) {
@@ -136,7 +136,7 @@ public class Server : MonoBehaviour {
         clientList.Remove(clientList.Find(x => x.connectionId == connectionId));
 
         // Send the disconnect message to all players
-        SendMessage("CLIENT_DISCONNECTED|" + connectionId, reliableChannel, clientList);
+        Send("CLIENT_DISCONNECTED|" + connectionId, reliableChannel, clientList);
     }
 
 
@@ -146,29 +146,34 @@ public class Server : MonoBehaviour {
         clientList.Find(x => x.connectionId == connectionId).playerName = playerName;
 
         // Tell everybody that a new player has connected
-        SendMessage("CLIENT_CONNECTED|" + playerName + "|" + connectionId, reliableChannel, clientList);
+        Send("CLIENT_CONNECTED|" + playerName + "|" + connectionId, reliableChannel, clientList);
     }
 
 
     private void OnClientPlaceTrap(int connectionId, string trapType, string[] data) {
         Debug.Log("Player: " + connectionId + " is placing [" + trapType + "]");
-        float x = float.Parse(data[0]);
-        float z = float.Parse(data[1]);
+        float x = int.Parse(data[0]);
+        float z = int.Parse(data[1]);
     }
 
 
-    private void SendMessage(string message, int channelId, int connectionId) {
+    private void Send(string message, int channelId, int connectionId) {
         List<ServerClient> clients = new List<ServerClient>();
         clients.Add(clientList.Find(x => x.connectionId == connectionId));
-        SendMessage(message, channelId, clients);
+        Send(message, channelId, clients);
     }
 
-    private void SendMessage(string message, int channelId, List<ServerClient> clients) {
+    private void Send(string message, int channelId, List<ServerClient> clients) {
         Debug.Log("Sending message: " + message);
         byte[] messageBuffer = Encoding.Unicode.GetBytes(message);
         foreach (ServerClient client in clients) {
             NetworkTransport.Send(hostId, client.connectionId, channelId, messageBuffer, message.Length * sizeof(char), out error);
         }
+    }
+
+
+    public void StartGame() {
+        Send("START_GAME", reliableChannel, clientList);
     }
 
     public List<ServerClient> getClients()
