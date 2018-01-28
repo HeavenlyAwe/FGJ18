@@ -12,6 +12,11 @@ public class CollectPlayers : MonoBehaviour {
     private Server server;
     private List<ServerClient> clients;
 
+    public Sprite usedSlotSPR;
+    public Sprite unUsedSlotSPR;
+
+    public GameObject[] slots;
+
     public List<string> playerNames;
 
     void Awake()
@@ -39,15 +44,23 @@ public class CollectPlayers : MonoBehaviour {
 
         clients = server.getClients();
 
-        string txt = "";
-        foreach(ServerClient client in clients)
+        int i = 0;
+        
+        for(int i=0; i<8; i++)
         {
-            txt += client.playerName + "\n";
+            slots[i].GetComponentInChildren<Text>().text = "";
+            slots[i].GetComponent<Image>().sprite = unUsedSlotSPR;
         }
-        playersText.text = txt;
-        mobilePlayersHeader.text = "Mobile players connected:\n(" + server.getClientCount() + "/8)";
 
-        ipAddress.text = Network.player.ipAddress + ":" + server.getPort();
+        foreach (ServerClient client in clients)
+        {
+            slots[i].GetComponentInChildren<Text>().text = client.playerName;
+            slots[i].GetComponent<Image>().sprite = usedSlotSPR;
+        }
+
+
+
+        ipAddress.text = Network.player.ipAddress;
 
     }
 

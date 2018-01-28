@@ -61,8 +61,6 @@ public class MovePlayer : MonoBehaviour {
         int ix = (int)(x+dx+hitPadding*Mathf.Sign(dx));
         int iz = (int)(z+dz+hitPadding*Mathf.Sign(dz));
 
-        Debug.Log(rot+"::::"+dx + "::" + dz);
-
         if(!isFloor(ix, (int)z))
         {
             // hit vertically
@@ -73,13 +71,6 @@ public class MovePlayer : MonoBehaviour {
         {
             // hit horizontally
             dz = 0;
-        }
-
-        if(!isFloor(ix, iz))
-        {
-            // hit both horizontally and vertically
-            //dx = 0;
-            //dz = 0;
         }
 
         if (enableMovement)
@@ -107,15 +98,6 @@ public class MovePlayer : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter(Collider other) {
-        //string tag = other.tag;
-        //if(tag=="Wall") {
-        //    Vector3 pos = transform.position - dPos;
-        //    transform.position = pos;
-        //    hitCountdown = .1f;
-        //}
-    }
-
     bool isFloor(int x, int z)
     {
         if(x<0 || z<0 || x>=bitmapWidth || z>=bitmapHeight)
@@ -130,7 +112,6 @@ public class MovePlayer : MonoBehaviour {
 
     public void hitByTrap(Trap t, float dist)
     {
-        Debug.Log("REMOVE-MovePlayer");
         // get properties of the trap for use!!!
         enableMovement = false;
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = true;
