@@ -46,7 +46,7 @@ public class MovePlayer : MonoBehaviour {
         float vert = Input.GetAxis("Vertical");
 
         if (vert != 0) {
-            FindObjectOfType<AudioManager>().Play("FootSteps");
+            FindObjectOfType<AudioManager>().PlayWithoutDuplicate("FootSteps");
         }
 
         angle = horiz * rotSpeed * Time.deltaTime;
