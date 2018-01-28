@@ -8,6 +8,7 @@ public class CollectPlayers : MonoBehaviour {
 
     private Text playersText;
     private Text mobilePlayersHeader;
+    private Text ipAddress;
     private Server server;
     private List<ServerClient> clients;
 
@@ -30,6 +31,7 @@ public class CollectPlayers : MonoBehaviour {
         playersText = GameObject.FindGameObjectWithTag("PlayersConnected").GetComponent<Text>();
         mobilePlayersHeader = GameObject.FindGameObjectWithTag("MobilePlayersHeader").GetComponent<Text>();
         server = GameObject.FindGameObjectWithTag("Server").GetComponent<Server>();
+        ipAddress = GameObject.FindGameObjectWithTag("IP").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,8 @@ public class CollectPlayers : MonoBehaviour {
         }
         playersText.text = txt;
         mobilePlayersHeader.text = "Mobile players connected:\n(" + server.getClientCount() + "/8)";
+
+        ipAddress.text = Network.player.ipAddress + ":" + server.getPort();
 
     }
 
