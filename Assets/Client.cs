@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class ClientPlayer {
@@ -35,6 +36,10 @@ public class Client : MonoBehaviour {
     private string playerName;
 
     private Dictionary<int, ClientPlayer> playerDictionary;
+
+    void Awake() {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
     public void Connect() {
         // Fetch the IP address of the Server
@@ -150,6 +155,7 @@ public class Client : MonoBehaviour {
         if (this.connectionId == connectionId) {
             GameObject.Find("Canvas").SetActive(false);
             isStarted = true;
+            SceneManager.LoadScene("PhoneGameplayScene");
         }
 
         ClientPlayer player = new ClientPlayer();
