@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -832,6 +832,7 @@ GameObject:
   - component: {fileID: 1423023275}
   - component: {fileID: 1423023277}
   - component: {fileID: 1423023276}
+  - component: {fileID: 1423023278}
   m_Layer: 5
   m_Name: GetOut
   m_TagString: Untagged
@@ -869,7 +870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.39511245, g: 0.9264706, b: 0.44275144, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -890,6 +891,22 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1423023274}
+--- !u!114 &1423023278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1423023274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a5b54cb38cc0441b8973d1dbdca0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalPosition: {x: 6, y: 0, z: 6}
+  player: {fileID: 1673648162}
+  missions:
+  - {fileID: 1678123062}
+  goalDistance: 1
 --- !u!1 &1480624789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1367,7 @@ GameObject:
   - component: {fileID: 1678123059}
   - component: {fileID: 1678123061}
   - component: {fileID: 1678123060}
+  - component: {fileID: 1678123062}
   m_Layer: 5
   m_Name: VialObjective
   m_TagString: Untagged
@@ -1387,7 +1405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.39607844, g: 0.9254902, b: 0.44313726, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1408,6 +1426,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1678123058}
+--- !u!114 &1678123062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1678123058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae86d12399a9b4940b2146c0cfa1ebc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1673648162}
+  targetDistance: 1
 --- !u!1 &1864313541
 GameObject:
   m_ObjectHideFlags: 0
