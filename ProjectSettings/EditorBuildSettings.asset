@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PhoneScene.unity
     guid: d423ee390ec2766489661219f1250485
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: 9f07aad3e0ffd40fdbd569cb8eba5a6b
+  - enabled: 1
+    path: Assets/Scenes/ClientScenes/GameplayScene.unity
+    guid: d9e08746bd62aad4bab8d9fad933972f
