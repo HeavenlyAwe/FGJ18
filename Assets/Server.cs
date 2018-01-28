@@ -181,4 +181,9 @@ public class Server : MonoBehaviour {
         return clientList.Count;
     }
 
+    public int getPort()
+    {
+        return port;
+    }
+
 }

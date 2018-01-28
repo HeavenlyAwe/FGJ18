@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 9f07aad3e0ffd40fdbd569cb8eba5a6b
+  - enabled: 0
+    path: Assets/Scenes/ClientScenes/PhoneGameplayScene.unity
+    guid: d9e08746bd62aad4bab8d9fad933972f
