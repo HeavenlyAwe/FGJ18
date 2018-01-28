@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerScript : MonoBehaviour {
 
@@ -11,6 +12,10 @@ public class TimerScript : MonoBehaviour {
 	public int seconds;
 	public Text timeShown;
 
+    private GameObject endScreen;
+	private float nextInstensify; 
+	private const float delaybetweenIntesifies = 30; 
+
 	private bool musicIntensified = false;
 
 	void Start() {
@@ -18,6 +23,9 @@ public class TimerScript : MonoBehaviour {
 		seconds = Mathf.CeilToInt(timeLeft%60);
 		string countdownString = seconds < 10 ?  ":0" : ":";
 		timeShown.text =  minutes + countdownString + seconds;
+        endScreen = GameObject.FindGameObjectWithTag("EndGameScreen");
+        endScreen.SetActive(false);
+		nextInstensify = timeLeft - delaybetweenIntesifies;
 	}
 	
 	// Update is called once per frame
@@ -31,12 +39,29 @@ public class TimerScript : MonoBehaviour {
 		
 		if (timeLeft < 0f) {
 			timeShown.text = "0:00";
-			Destroy(this);
+            endScreen.SetActive(true);
+            //Destroy(this);
+            gameObject.SetActive(false);
 		}
+
 		
 		if (timeLeft <= 30f && !musicIntensified) {
-			FindObjectOfType<AudioManager>().IntensifyGameThemeByTimer();
+			FindObjectOfType<AudioManager> ().IntensifyGameThemeByTimer ();
 			musicIntensified = true;
+		} else if (timeLeft <= nextInstensify) {
+			nextInstensify = timeLeft - delaybetweenIntesifies;
+			FindObjectOfType<AudioManager> ().IntensifyGameThemeByTrap ();
 		}
 	}
+
+    public void restartGame()
+    {
+        endScreen.SetActive(false);
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public void newGame()
+    {
+        SceneManager.LoadScene("StartPage");
+    }
 }

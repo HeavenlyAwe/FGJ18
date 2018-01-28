@@ -6,30 +6,31 @@ using UnityEngine.UI;
 
 public class CollectPlayers : MonoBehaviour {
 
-    private Text playersText;
-    private Text mobilePlayersHeader;
     private Text ipAddress;
     private Server server;
     private List<ServerClient> clients;
+
+    public Sprite usedSlotSPR;
+    public Sprite unUsedSlotSPR;
+
+    public GameObject[] slots;
 
     public List<string> playerNames;
 
     void Awake()
     {
-        playerNames.Add("Dirty Harry");
-        playerNames.Add("Slutty Sally");
-        playerNames.Add("Harley Quinn");
-        playerNames.Add("Billy the Kid");
-        playerNames.Add("Tricky Tracy");
-        playerNames.Add("Al Capone");
+        playerNames.Add("Vader");
+        playerNames.Add("Pinkie");
+        playerNames.Add("Brain");
         playerNames.Add("Twoface");
-        playerNames.Add("The three-legged monster");
+        playerNames.Add("Ursula");
+        playerNames.Add("Scar");
+        playerNames.Add("Khan");
+        playerNames.Add("Rattigan");
     }
 
     // Use this for initialization
     void Start () {
-        playersText = GameObject.FindGameObjectWithTag("PlayersConnected").GetComponent<Text>();
-        mobilePlayersHeader = GameObject.FindGameObjectWithTag("MobilePlayersHeader").GetComponent<Text>();
         server = GameObject.FindGameObjectWithTag("Server").GetComponent<Server>();
         ipAddress = GameObject.FindGameObjectWithTag("IP").GetComponent<Text>();
     }
@@ -39,15 +40,24 @@ public class CollectPlayers : MonoBehaviour {
 
         clients = server.getClients();
 
-        string txt = "";
-        foreach(ServerClient client in clients)
+        
+        for(int idx=0; idx<8; idx++)
         {
-            txt += client.playerName + "\n";
+            slots[idx].GetComponentInChildren<Text>().text = "";
+            slots[idx].GetComponent<Image>().sprite = unUsedSlotSPR;
         }
-        playersText.text = txt;
-        mobilePlayersHeader.text = "Mobile players connected:\n(" + server.getClientCount() + "/8)";
 
-        ipAddress.text = Network.player.ipAddress + ":" + server.getPort();
+        int i = 0;
+        foreach (ServerClient client in clients)
+        {
+            slots[i].GetComponentInChildren<Text>().text = client.playerName;
+            slots[i].GetComponent<Image>().sprite = usedSlotSPR;
+            i++;
+        }
+
+
+
+        ipAddress.text = Network.player.ipAddress;
 
     }
 

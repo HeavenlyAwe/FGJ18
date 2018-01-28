@@ -56,13 +56,6 @@ public class Server : MonoBehaviour {
         Debug.Log("Server Started: " + hostId + " : " + webHostId);
 
         clientList = new List<ServerClient>();
-
-        // insert dummy
-        ServerClient serverClient = new ServerClient();
-        serverClient.connectionId = 1234;
-        serverClient.playerName = collectPlayers.getRandomName(); // "TEMP";
-        clientList.Add(serverClient);
-
     }
 
     // Update is called once per frame

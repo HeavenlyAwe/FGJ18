@@ -12,6 +12,9 @@ TagManager:
   - MobilePlayersHeader
   - Traps
   - PlayerStopMarker
+  - Explosion
+  - IP
+  - EndGameScreen
   layers:
   - Default
   - TransparentFX

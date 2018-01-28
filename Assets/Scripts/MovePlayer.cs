@@ -61,9 +61,9 @@ public class MovePlayer : MonoBehaviour {
         int ix = (int)(x + dx + hitPadding * Mathf.Sign(dx));
         int iz = (int)(z + dz + hitPadding * Mathf.Sign(dz));
 
-        // Debug.Log(rot+"::::"+dx + "::" + dz);
+        if(!isFloor(ix, (int)z))
+        {
 
-        if (!isFloor(ix, (int)z)) {
             // hit vertically
             dx = 0;
         }
@@ -73,14 +73,9 @@ public class MovePlayer : MonoBehaviour {
             dz = 0;
         }
 
-        if (!isFloor(ix, iz)) {
-            // hit both horizontally and vertically
-            //dx = 0;
-            //dz = 0;
-        }
-
-        if (enableMovement) {
-            transform.position = pos + new Vector3(dx, 0, dz);
+        if (enableMovement)
+        {
+            transform.position = pos + new Vector3(dx,0,dz);
 
         } else {
             // movement not enabled.
@@ -101,17 +96,10 @@ public class MovePlayer : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter(Collider other) {
-        //string tag = other.tag;
-        //if(tag=="Wall") {
-        //    Vector3 pos = transform.position - dPos;
-        //    transform.position = pos;
-        //    hitCountdown = .1f;
-        //}
-    }
-
-    bool isFloor(int x, int z) {
-        if (x < 0 || z < 0 || x >= bitmapWidth || z >= bitmapHeight) {
+    bool isFloor(int x, int z)
+    {
+        if(x<0 || z<0 || x>=bitmapWidth || z>=bitmapHeight)
+        {
             return false;
         }
         //return cFloor.Equals(bitmapColors[x + z * bitmapWidth]);
@@ -120,8 +108,8 @@ public class MovePlayer : MonoBehaviour {
         return bFloor;
     }
 
-    public void hitByTrap(Trap t, float dist) {
-        Debug.Log("REMOVE-MovePlayer");
+    public void hitByTrap(Trap t, float dist)
+    {
         // get properties of the trap for use!!!
         enableMovement = false;
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = true;
