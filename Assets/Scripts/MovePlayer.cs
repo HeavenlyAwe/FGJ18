@@ -23,6 +23,8 @@ public class MovePlayer : MonoBehaviour {
     private bool enableMovement = true;
     private float trapHitCountdown;
 
+    private float hitPadding = 2.5f;
+
     // Use this for initialization
     void Start () {
         lvlController = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelController>();
@@ -38,7 +40,7 @@ public class MovePlayer : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void Update () {
 
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
@@ -48,62 +50,70 @@ public class MovePlayer : MonoBehaviour {
         transform.Rotate(new Vector3(0f, 1f, 0f), angle);
 
         dPos = transform.forward * speed * Time.deltaTime * vert;
-        Vector3 pos = transform.position + dPos;
+        Vector3 pos = transform.position ;
 
-        int ix = (int)pos.x;
-        int iz = (int)pos.z;
+        Vector3 rot = transform.rotation.eulerAngles;
+
+        float x = pos.x*5f-.5f;
+        float z = pos.z*5f-.5f;
+        float dx = dPos.x;
+        float dz = dPos.z;
+        int ix = (int)(x+dx+hitPadding*Mathf.Sign(dx));
+        int iz = (int)(z+dz+hitPadding*Mathf.Sign(dz));
+
+        Debug.Log(rot+"::::"+dx + "::" + dz);
+
+        if(!isFloor(ix, (int)z))
+        {
+            // hit vertically
+            dx = 0;
+        }
+
+        if(!isFloor((int)x, iz))
+        {
+            // hit horizontally
+            dz = 0;
+        }
+
+        if(!isFloor(ix, iz))
+        {
+            // hit both horizontally and vertically
+            //dx = 0;
+            //dz = 0;
+        }
 
         if (enableMovement)
         {
-            Vector3 rot = transform.rotation.eulerAngles;
-            if (rot.y >= 0 && rot.y < 90)
-            {
-                if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz + 1) && isFloor(ix, iz + 1))
-                {
-                    transform.position = pos;
-                }
-            }
-            if (rot.y >= 90 && rot.y < 180)
-            {
-                if (isFloor(ix - 1, iz) && isFloor(ix - 1, iz + 1) && isFloor(ix, iz + 1))
-                {
-                    transform.position = pos;
-                }
-            }
-            if (rot.y >= 180 && rot.y < 270)
-            {
-                if (isFloor(ix - 1, iz) && isFloor(ix - 1, iz - 1) && isFloor(ix, iz - 1))
-                {
-                    transform.position = pos;
-                }
-            }
-            if (rot.y >= 270 && rot.y < 360)
-            {
-                if (isFloor(ix + 1, iz) && isFloor(ix + 1, iz - 1) && isFloor(ix, iz - 1))
-                {
-                    transform.position = pos;
-                }
-            }
-        } else
+            transform.position = pos + new Vector3(dx,0,dz);
+
+        }
+        else
         {
             // movement not enabled.
             trapHitCountdown -= Time.deltaTime;
             if(trapHitCountdown<0)
             {
                 enableMovement = true;
-                GameObject.FindGameObjectWithTag("PlayerStopMarker").GetComponent<MeshRenderer>().enabled = false;
+                GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = false;
+                GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().StopPlayback();
+                Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+            else
+            {
+                // shake camera
+                Camera.main.transform.rotation = Quaternion.Euler(Random.Range(0f, 1f), Random.Range(0f, 1f), 0);
             }
         }
 
     }
 
     void OnTriggerEnter(Collider other) {
-        string tag = other.tag;
-        if(tag=="Wall") {
-            Vector3 pos = transform.position - dPos;
-            transform.position = pos;
-            hitCountdown = .1f;
-        }
+        //string tag = other.tag;
+        //if(tag=="Wall") {
+        //    Vector3 pos = transform.position - dPos;
+        //    transform.position = pos;
+        //    hitCountdown = .1f;
+        //}
     }
 
     bool isFloor(int x, int z)
@@ -112,7 +122,10 @@ public class MovePlayer : MonoBehaviour {
         {
             return false;
         }
-        return cFloor.Equals(bitmapColors[x + z * bitmapWidth]);
+        //return cFloor.Equals(bitmapColors[x + z * bitmapWidth]);
+        byte rComp = bitmapColors[x + z * bitmapWidth].r;
+        bool bFloor = rComp > 48;
+        return bFloor;
     }
 
     public void hitByTrap(Trap t, float dist)
@@ -120,8 +133,10 @@ public class MovePlayer : MonoBehaviour {
         Debug.Log("REMOVE-MovePlayer");
         // get properties of the trap for use!!!
         enableMovement = false;
-        GameObject.FindGameObjectWithTag("PlayerStopMarker").GetComponent<MeshRenderer>().enabled = true;
-        trapHitCountdown = .5f; // dist; // is this right??? - propably not...
+        GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = true;
+        GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().StartPlayback();
+        GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().speed = 2;
+        trapHitCountdown = 1f; // dist; // is this right??? - propably not...
 
     }
 }
