@@ -16,14 +16,14 @@ public class CollectPlayers : MonoBehaviour {
 
     void Awake()
     {
-        playerNames.Add("Dirty Harry");
-        playerNames.Add("Slutty Sally");
-        playerNames.Add("Harley Quinn");
-        playerNames.Add("Billy the Kid");
-        playerNames.Add("Tricky Tracy");
-        playerNames.Add("Al Capone");
+        playerNames.Add("Vader");
+        playerNames.Add("Pinkie");
+        playerNames.Add("Brain");
         playerNames.Add("Twoface");
-        playerNames.Add("The three-legged monster");
+        playerNames.Add("Ursula");
+        playerNames.Add("Scar");
+        playerNames.Add("Khan");
+        playerNames.Add("Rattigan");
     }
 
     // Use this for initialization
