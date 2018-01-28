@@ -30,8 +30,9 @@ public class Server : MonoBehaviour {
 
     public List<ServerClient> clientList;
 
-    void Awake()
-    {
+    public Traps traps;
+
+    void Awake() {
         DontDestroyOnLoad(transform.gameObject);
     }
 
@@ -96,8 +97,13 @@ public class Server : MonoBehaviour {
                     case "CLIENT_NAME":
                         OnClientName(connectionId, commandParts[1]);
                         break;
+                    case "CLIENT_JOIN":
+                        break;
                     case "CLIENT_PLACE_TRAP":
-                        OnClientPlaceTrap(connectionId, commandParts[1], commandParts[2].Split('%'));
+                        OnClientPlaceTrap(connectionId, commandParts[1], int.Parse(commandParts[2]), commandParts[3].Split('%'));
+                        break;
+                    case "CLIENT_ACTIVATE_TRAP":
+                        OnClientActivateTrap(connectionId, int.Parse(commandParts[1]));
                         break;
                     default:
                         Debug.Log("Invalid command : " + message);
@@ -120,15 +126,17 @@ public class Server : MonoBehaviour {
 
         clientList.Add(serverClient);
 
-        // Inform the player of his ID
-        // Request his name and send the name of all other players
-        string message = "ASK_CLIENT_NAME|" + connectionId + "|";
-        foreach (ServerClient client in clientList) {
-            message += client.playerName + "%" + client.connectionId + "|";
-        }
-        message = message.Trim('|');
+        Send("CLIENT_JOINED|" + serverClient.connectionId + "|" + serverClient.playerName, reliableChannel, connectionId);
 
-        Send(message, reliableChannel, connectionId);
+        //// Inform the player of his ID
+        //// Request his name and send the name of all other players
+        //string message = "ASK_CLIENT_NAME|" + connectionId + "|";
+        //foreach (ServerClient client in clientList) {
+        //    message += client.playerName + "%" + client.connectionId + "|";
+        //}
+        //message = message.Trim('|');
+
+        //Send(message, reliableChannel, connectionId);
     }
 
     private void OnDisconnection(int connectionId) {
@@ -150,12 +158,17 @@ public class Server : MonoBehaviour {
     }
 
 
-    private void OnClientPlaceTrap(int connectionId, string trapType, string[] data) {
+    private void OnClientPlaceTrap(int connectionId, string trapType, int trapId, string[] data) {
         Debug.Log("Player: " + connectionId + " is placing [" + trapType + "]");
-        float x = int.Parse(data[0]);
-        float z = int.Parse(data[1]);
+        float x = float.Parse(data[0]);
+        float z = float.Parse(data[1]);
+        Debug.Log("Ratio: " + x / 96f + " : " + z / 96f);
+        traps.placeTrap(connectionId, trapId, x, z, trapType);
     }
 
+    private void OnClientActivateTrap(int connectionId, int trapId) {
+        traps.activateTrap(connectionId, trapId);
+    }
 
     private void Send(string message, int channelId, int connectionId) {
         List<ServerClient> clients = new List<ServerClient>();
@@ -176,18 +189,15 @@ public class Server : MonoBehaviour {
         Send("START_GAME", reliableChannel, clientList);
     }
 
-    public List<ServerClient> getClients()
-    {
+    public List<ServerClient> getClients() {
         return clientList;
     }
 
-    public int getClientCount()
-    {
+    public int getClientCount() {
         return clientList.Count;
     }
 
-    public int getPort()
-    {
+    public int getPort() {
         return port;
     }
 

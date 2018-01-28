@@ -5,6 +5,7 @@ using UnityEngine;
 public class LoadMazeFromBitmap : MonoBehaviour {
 
     public SpriteRenderer maze;
+    public RectTransform gamePanel;
 
     void Start() {
 
