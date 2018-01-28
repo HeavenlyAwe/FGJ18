@@ -11,7 +11,7 @@ public class VialObjectiveScript : ObjectiveMission {
 
  	// Use this for initialization
 	void Start () {
-        vial = GameObject.Find("Vial");
+        vial = GameObject.Find("vial");
 	}
 	
 	// Update is called once per frame
