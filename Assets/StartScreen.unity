@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f07751de2e7b547a652e8db2148c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traps: {fileID: 1674928012}
+  traps: {fileID: 0}
 --- !u!4 &6463958
 Transform:
   m_ObjectHideFlags: 0
@@ -2149,6 +2149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bcbef8929ee1e842bfc93c00d2db945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedSlotSPR: {fileID: 21300000, guid: 7df8a013d7c7e734fb489566fdf5988f, type: 3}
+  unUsedSlotSPR: {fileID: 21300000, guid: ab24aa8b7d72e054b8d43e2e8e6ba3fa, type: 3}
   slots:
   - {fileID: 1054990662}
   - {fileID: 740156544}

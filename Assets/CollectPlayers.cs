@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class CollectPlayers : MonoBehaviour {
 
-    private Text playersText;
-    private Text mobilePlayersHeader;
     private Text ipAddress;
     private Server server;
     private List<ServerClient> clients;
@@ -33,8 +31,6 @@ public class CollectPlayers : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        playersText = GameObject.FindGameObjectWithTag("PlayersConnected").GetComponent<Text>();
-        mobilePlayersHeader = GameObject.FindGameObjectWithTag("MobilePlayersHeader").GetComponent<Text>();
         server = GameObject.FindGameObjectWithTag("Server").GetComponent<Server>();
         ipAddress = GameObject.FindGameObjectWithTag("IP").GetComponent<Text>();
     }
@@ -44,18 +40,19 @@ public class CollectPlayers : MonoBehaviour {
 
         clients = server.getClients();
 
-        int i = 0;
         
-        for(int i=0; i<8; i++)
+        for(int idx=0; idx<8; idx++)
         {
-            slots[i].GetComponentInChildren<Text>().text = "";
-            slots[i].GetComponent<Image>().sprite = unUsedSlotSPR;
+            slots[idx].GetComponentInChildren<Text>().text = "";
+            slots[idx].GetComponent<Image>().sprite = unUsedSlotSPR;
         }
 
+        int i = 0;
         foreach (ServerClient client in clients)
         {
             slots[i].GetComponentInChildren<Text>().text = client.playerName;
             slots[i].GetComponent<Image>().sprite = usedSlotSPR;
+            i++;
         }
 
 
