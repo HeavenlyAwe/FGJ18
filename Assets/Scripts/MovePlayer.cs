@@ -36,7 +36,6 @@ public class MovePlayer : MonoBehaviour {
 
         // Now the player object is available, get a reference to the gameobject in Traps-script
         GameObject.FindGameObjectWithTag("Traps").GetComponent<Traps>().getPlayerGO();
-
     }
 
     // Update is called once per frame
