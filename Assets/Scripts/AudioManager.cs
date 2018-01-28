@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 {
 
 	public bool isAudioManagerForMenu;
+	private int numberOfTrapsDetonated; 
+	private const int numberoftrapsbetweenDetonations = 1; 
 
 	public Sound[] sounds;
 
@@ -27,8 +29,18 @@ public class AudioManager : MonoBehaviour
 		if (isAudioManagerForMenu) {
 			PlayMainMenuThemes();
 		} else {
+			numberOfTrapsDetonated = 0;
 			StartGameMusic();
 		}
+	}
+
+	public void trapDetonated() {
+		numberOfTrapsDetonated++; 
+		if (numberOfTrapsDetonated == numberoftrapsbetweenDetonations) {
+			IntensifyGameThemeByTrap ();
+			numberOfTrapsDetonated = 0;
+		}
+
 	}
 
 	public void Update() {
