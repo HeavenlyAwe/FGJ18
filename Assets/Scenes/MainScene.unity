@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -186,6 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b7443637009452d979880f27225f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VialTransform: {fileID: 0}
+  VialAcquiredImage: {fileID: 0}
+  GotOutImage: {fileID: 0}
   IsPickedUp: 0
 --- !u!4 &526104056
 Transform:
@@ -630,7 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   levelBitmaps:
-  - {fileID: 21300000, guid: b13c28bf40be86b49afc07c289b4adbc, type: 3}
+  - {fileID: 21300000, guid: f6486548dd780a942b2a613e5fd5333a, type: 3}
 --- !u!4 &674288856
 Transform:
   m_ObjectHideFlags: 0
