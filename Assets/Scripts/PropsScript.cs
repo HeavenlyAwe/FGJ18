@@ -44,6 +44,10 @@ public class PropsScript : MonoBehaviour {
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                         tmpGO.transform.parent = objectGO[0].transform;
                 } else if (index == 1) {
+					GameObject door = new GameObject ();
+					door.transform.position = new Vector3 (x * 0.2f, 0, y * 0.2f);
+					door.transform.parent = objectGO [0].transform;
+					door.transform.name = "door";
                         //tmpGO = Instantiate(preFabs[1], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                         //tmpGO.transform.parent = objectGO[1].transform;
