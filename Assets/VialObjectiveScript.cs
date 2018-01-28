@@ -21,6 +21,7 @@ public class VialObjectiveScript : ObjectiveMission {
         //        if (Input.GetKeyDown(KeyCode.E)) {
         //            SetDone(true);
         //            GetComponent<Image>().enabled = true;
+        //            FindObjectOfType<AudioManager>().Play("CollectVial");
         //        }
         //    }
         //}
@@ -28,6 +29,7 @@ public class VialObjectiveScript : ObjectiveMission {
         if (Input.GetKeyDown(KeyCode.E)) {
             SetDone(true);
             GetComponent<Image>().enabled = true;
+            FindObjectOfType<AudioManager>().Play("CollectVial");
         }
     }
 }

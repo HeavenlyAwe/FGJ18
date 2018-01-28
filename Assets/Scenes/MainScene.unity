@@ -1592,6 +1592,30 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: CollectVial
+    clip: {fileID: 8300000, guid: 3d6875be2740e46d798778e329f6a1a7, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FootSteps
+    clip: {fileID: 8300000, guid: dfe6d71b481a24277adc6f2738278581, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BombBeeps
+    clip: {fileID: 8300000, guid: 31dd397ccb24044f7bcf932d2ee0a7e8, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BombExplosion
+    clip: {fileID: 8300000, guid: 6622cf8c5fae94065af62f93c362ea3a, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1556454289
 Transform:
   m_ObjectHideFlags: 0

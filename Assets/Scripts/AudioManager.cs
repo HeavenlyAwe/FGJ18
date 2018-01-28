@@ -104,7 +104,7 @@ public class AudioManager : MonoBehaviour
 		Play("CountdownIntensity");
 		}
 
-	private void Play(string sound)
+	public void Play(string sound)
 	{
 		Sound s = GetSound (sound);
 		if (s == null)
@@ -115,7 +115,25 @@ public class AudioManager : MonoBehaviour
 		s.source.Play();
 	}
 
-	private void Stop(string sound)
+	public void PlayWithoutDuplicate(string sound) {
+		Sound s = GetSound (sound);
+		if (s == null || s.source.isPlaying)
+		{
+			return;
+		}
+		s.source.Play();
+	}
+
+	public void PlayFromLocation(string sound, Vector3 position) {
+		Sound s = GetSound (sound);
+		if (s == null || s.source.isPlaying)
+		{
+			return;
+		}
+		AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+	}
+
+	public void Stop(string sound)
 	{
 		Sound s = GetSound (sound);
 		if (s == null)
