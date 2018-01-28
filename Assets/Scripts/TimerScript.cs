@@ -42,6 +42,7 @@ public class TimerScript : MonoBehaviour {
             endScreen.SetActive(true);
             //Destroy(this);
             gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("EndGameScreen").GetComponent<EndGame>().loseGame();
 		}
 
 		
@@ -54,14 +55,4 @@ public class TimerScript : MonoBehaviour {
 		}
 	}
 
-    public void restartGame()
-    {
-        endScreen.SetActive(false);
-        SceneManager.LoadScene("MainScene");
-    }
-
-    public void newGame()
-    {
-        SceneManager.LoadScene("StartPage");
-    }
 }
