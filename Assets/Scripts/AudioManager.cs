@@ -43,12 +43,10 @@ public class AudioManager : MonoBehaviour
 
 	}
 
+	//This method's here only for testing, shouldn't really do anything
 	public void Update() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			IntensifyGameThemeByTrap ();
-		}
-		if (Input.GetKeyDown(KeyCode.T)) {
-			IntensifyGameThemeByTimer ();
 		}
 	}
 
@@ -67,14 +65,7 @@ public class AudioManager : MonoBehaviour
 	}
 
 	public void StartGameMusic() {
-		Sound low = GetSound("LowIntensity");
-		if (low == null)
-		{
-			Debug.LogWarning("Low intensity game theme not found!");
-			return;
-		}
-
-		low.source.Play();
+		Play("LowIntensity");
 	}
 
 
@@ -99,7 +90,6 @@ public class AudioManager : MonoBehaviour
 
 		if (low.source.isPlaying) {
 			float remainder = 3.75f - low.source.time % 3.75f;
-			Debug.LogWarning ("Remainder:" + remainder);
 			medium.source.time = low.source.time + remainder;
 			medium.source.PlayScheduled(AudioSettings.dspTime + remainder);
 			low.source.SetScheduledEndTime(AudioSettings.dspTime + remainder);
@@ -107,23 +97,16 @@ public class AudioManager : MonoBehaviour
 	}
 
 	public void IntensifyGameThemeByTimer() {
-		Sound countdown = GetSound("CountdownIntensity");
-
-		if (countdown == null)
-		{
-			Debug.LogWarning("Sounds for countdown game theme not found!");
-			return;
-		}
 		Stop("LowIntensity");
 		Stop("MediumIntensity");
 		Stop("HighIntensity");
 
-		countdown.source.Play();
+		Play("CountdownIntensity");
 		}
 
 	private void Play(string sound)
 	{
-		Sound s = GetSound (name);
+		Sound s = GetSound (sound);
 		if (s == null)
 		{
 			return;
@@ -134,7 +117,7 @@ public class AudioManager : MonoBehaviour
 
 	private void Stop(string sound)
 	{
-		Sound s = GetSound (name);
+		Sound s = GetSound (sound);
 		if (s == null)
 		{
 			return;
