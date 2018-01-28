@@ -37,7 +37,7 @@ public class CeilingScript : MonoBehaviour {
                 //Debug.Log("COLOR: "+ c[x+w*y]);
                 int index = (int)(c[x+w*y].r / 16);
 
-                Debug.Log(index);
+                //Debug.Log(index);
                 //Debug.Log(preFabs(index));
 
                 if(index < 2) {

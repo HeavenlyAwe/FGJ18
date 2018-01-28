@@ -36,7 +36,7 @@ public class WallsScript : MonoBehaviour {
                 //Debug.Log("COLOR: "+ c[x+w*y]);
                 int index = (int)(c[x+w*y].r / 16);
 
-                Debug.Log(index);
+                //Debug.Log(index);
                 //Debug.Log(preFabs(index));
 
                 if(index < 2) {
@@ -44,9 +44,9 @@ public class WallsScript : MonoBehaviour {
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                         tmpGO.transform.parent = objectGO[index].transform;
                 } else {
-                    tmpGO = Instantiate(preFabs[3], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                    //tmpGO = Instantiate(preFabs[3], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                    tmpGO.transform.parent = objectGO[3].transform;
+                    //tmpGO.transform.parent = objectGO[3].transform;
                 }
 					 
 			}
