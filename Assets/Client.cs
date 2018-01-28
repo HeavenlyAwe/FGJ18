@@ -7,10 +7,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class ClientPlayer {
-    public string playerName;
-    public int connectionId;
-}
+//public class ClientPlayer {
+//    public string playerName;
+//    public int connectionId;
+//}
 
 public class Client : MonoBehaviour {
 
@@ -35,10 +35,20 @@ public class Client : MonoBehaviour {
 
     private string playerName;
 
-    private Dictionary<int, ClientPlayer> playerDictionary;
+
+    public GameObject waitScreen;
+    public GameObject joinScreen;
+
+    public Text playerNameText;
+
 
     void Awake() {
         DontDestroyOnLoad(transform.gameObject);
+    }
+
+    void Start() {
+        waitScreen.SetActive(false);
+        joinScreen.SetActive(true);
     }
 
     public void Connect() {
@@ -48,14 +58,6 @@ public class Client : MonoBehaviour {
             Debug.Log("You must enter an IP Address!");
             return;
         }
-
-        // Does the player have a name?
-        string name = GameObject.Find("NameInputField").GetComponent<InputField>().text;
-        if (name == "") {
-            Debug.Log("You must enter a name!");
-            return;
-        }
-        playerName = name;
 
         NetworkTransport.Init();
         ConnectionConfig config = new ConnectionConfig();
@@ -72,14 +74,15 @@ public class Client : MonoBehaviour {
         isConnected = true;
 
         Debug.Log("Connected!");
-
-        playerDictionary = new Dictionary<int, ClientPlayer>();
     }
 
-    public void PlaceTrap() {
+    public void PlaceTrap(float x, float y, int trapId) {
         string trapType = "bomb";
-        Vector3 position = new Vector3(0, 0, 0);
-        Send("CLIENT_PLACE_TRAP|" + trapType + "|" + position.x + "%" + position.z, reliableChannel);
+        Send("CLIENT_PLACE_TRAP|" + trapType + "|" + trapId + "|" + x + "%" + y, reliableChannel);
+    }
+
+    public void ActivateTrap(int trapId) {
+        Send("CLIENT_ACTIVATE_TRAP|" + trapId, reliableChannel);
     }
 
 
@@ -98,77 +101,35 @@ public class Client : MonoBehaviour {
         byte error;
         NetworkEventType recData = NetworkTransport.Receive(out recHostId, out connectionId, out channelId, recBuffer, bufferSize, out dataSize, out error);
         switch (recData) {
-            //case NetworkEventType.Nothing:         //1
-            //    break;
-            //case NetworkEventType.ConnectEvent:    //2
-            //    break;
-            case NetworkEventType.DataEvent:       //3
+            case NetworkEventType.DataEvent:
                 string message = Encoding.Unicode.GetString(recBuffer, 0, dataSize);
                 Debug.Log("Receiving message: " + message);
 
                 string[] commandParts = message.Split('|');
 
                 switch (commandParts[0]) {
-                    case "ASK_CLIENT_NAME":
-                        OnAskClientName(commandParts);
+                    case "CLIENT_JOINED":
+                        playerName = commandParts[2];
+                        playerNameText.text = playerName;
+
+                        waitScreen.SetActive(true);
+                        joinScreen.SetActive(false);
                         break;
-                    case "CLIENT_CONNECTED":
-                        OnClientPlayerConnected(commandParts[1], int.Parse(commandParts[2]));
+
+                    case "START_GAME":
+                        SceneManager.LoadScene("PhoneGameplayScene");
                         break;
-                    case "CLIENT_DISCONNECTED":
-                        OnClientPlayerDisconnected(int.Parse(commandParts[1]));
-                        break;
+
                     default:
                         Debug.Log("Invalid command : " + message);
                         break;
                 }
                 break;
-                //case NetworkEventType.DisconnectEvent: //4
-                //    break;
-        }
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
-            Debug.Log(Input.GetTouch(0).position);
         }
     }
 
 
-    private void OnAskClientName(string[] data) {
-        // First index of data has already been accessed
-
-        // Set this client's ID
-        clientId = int.Parse(data[1]);
-
-        // Send the name to the Server
-        Send("CLIENT_NAME|" + playerName, reliableChannel);
-
-        // Create all other players
-        for (int i = 2; i < data.Length - 1; i++) {
-            string[] d = data[i].Split('%');
-            OnClientPlayerConnected(d[0], int.Parse(d[1]));
-        }
-    }
-
-    private void OnClientPlayerConnected(string playerName, int connectionId) {
-
-        // This function should probably be updated. The other player stuff might be redundant
-        if (this.connectionId == connectionId) {
-            GameObject.Find("Canvas").SetActive(false);
-            isStarted = true;
-            SceneManager.LoadScene("PhoneGameplayScene");
-        }
-
-        ClientPlayer player = new ClientPlayer();
-        player.playerName = playerName;
-        player.connectionId = connectionId;
-
-        playerDictionary.Add(connectionId, player);
-    }
-
-
-    private void OnClientPlayerDisconnected(int connectionId) {
-        playerDictionary.Remove(connectionId);
-    }
 
     private void Send(string message, int channelId) {
         Debug.Log("Sending message: " + message);

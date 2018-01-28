@@ -26,6 +26,8 @@ public class Trap
 
 public class Traps : MonoBehaviour {
 
+    public GameObject trapGO;
+
     private Server server;
 
     private float startDelay;
@@ -78,10 +80,12 @@ public class Traps : MonoBehaviour {
 
     }
 
-    void placeTrap(int userId, int trapId, float x, float z, string type)
+    public void placeTrap(int userId, int trapId, float x, float z, string type)
     {
         float timer = 2f; // should be taken from traptype!
         placedTraps.Add(new Trap(userId, trapId, x, z, type, timer));
+
+        Instantiate(trapGO, new Vector3(x, 2, z), Quaternion.identity);
     }
 
     public void detonateTrap(Trap t, int idx)
@@ -91,11 +95,9 @@ public class Traps : MonoBehaviour {
         if (dist < 25f)
         {
             // Hit by trap
-            Debug.Log("KABOOM");
             player.GetComponent<MovePlayer>().hitByTrap(t, dist);
         }
         // add detonated trap to removelist
-        Debug.Log("REMOVE TRAPS: " + removeTraps.Count);
         removeTraps.Add(idx);
 
     }
@@ -114,15 +116,20 @@ public class Traps : MonoBehaviour {
 
     public void getPlayerGO()
     {
+        Debug.Log("GO");
         player = GameObject.FindGameObjectWithTag("Player");
 
         // make some dummytraps:
         placedTraps.Add(new global::Trap(111, 0, 3, 3, "test", 1f));
         activateTrap(111, 0);
         placedTraps.Add(new global::Trap(111, 1, 5, 5, "test", 2f));
-        activateTrap(111, 1);
+        //activateTrap(111, 1);
         placedTraps.Add(new global::Trap(111, 2, 2, 2, "test", 3f));
-        activateTrap(111, 2);
+        //activateTrap(111, 2);
         Debug.Log("Traps Placed");
+        foreach(Trap t in placedTraps)
+        {
+            Instantiate(trapGO, new Vector3(t.x, 2, t.z), Quaternion.identity);
+        }
     }
 }
