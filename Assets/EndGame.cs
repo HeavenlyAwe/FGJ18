@@ -31,6 +31,7 @@ public class EndGame : MonoBehaviour {
 
     public void winGame()
     {
+        Debug.Log("WINNING LIKE A PRO!");
         win.SetActive(true);
         lose.SetActive(false);
     }

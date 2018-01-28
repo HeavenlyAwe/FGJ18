@@ -36,7 +36,6 @@ public class MovePlayer : MonoBehaviour {
 
         // Now the player object is available, get a reference to the gameobject in Traps-script
         GameObject.FindGameObjectWithTag("Traps").GetComponent<Traps>().getPlayerGO();
-
     }
 
     // Update is called once per frame
@@ -44,6 +43,10 @@ public class MovePlayer : MonoBehaviour {
 
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
+
+        if (vert != 0) {
+            FindObjectOfType<AudioManager>().PlayWithoutDuplicate("FootSteps");
+        }
 
         angle = horiz * rotSpeed * Time.deltaTime;
 
