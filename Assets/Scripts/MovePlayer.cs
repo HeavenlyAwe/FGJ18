@@ -7,7 +7,7 @@ public class MovePlayer : MonoBehaviour {
     public float speed;
     public float rotSpeed;
 
-    public float angle=0;
+    public float angle = 0;
 
     private Vector3 dPos;
     private float hitCountdown = 0;
@@ -26,7 +26,7 @@ public class MovePlayer : MonoBehaviour {
     private float hitPadding = 2.5f;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         lvlController = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelController>();
         level = lvlController.level;
         levelBitmap = lvlController.levelBitmaps[level];
@@ -40,7 +40,7 @@ public class MovePlayer : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
 
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
@@ -50,25 +50,25 @@ public class MovePlayer : MonoBehaviour {
         transform.Rotate(new Vector3(0f, 1f, 0f), angle);
 
         dPos = transform.forward * speed * Time.deltaTime * vert;
-        Vector3 pos = transform.position ;
+        Vector3 pos = transform.position;
 
         Vector3 rot = transform.rotation.eulerAngles;
 
-        float x = pos.x*5f-.5f;
-        float z = pos.z*5f-.5f;
+        float x = pos.x * 5f - .5f;
+        float z = pos.z * 5f - .5f;
         float dx = dPos.x;
         float dz = dPos.z;
-        int ix = (int)(x+dx+hitPadding*Mathf.Sign(dx));
-        int iz = (int)(z+dz+hitPadding*Mathf.Sign(dz));
+        int ix = (int)(x + dx + hitPadding * Mathf.Sign(dx));
+        int iz = (int)(z + dz + hitPadding * Mathf.Sign(dz));
 
         if(!isFloor(ix, (int)z))
         {
+
             // hit vertically
             dx = 0;
         }
 
-        if(!isFloor((int)x, iz))
-        {
+        if (!isFloor((int)x, iz)) {
             // hit horizontally
             dz = 0;
         }
@@ -77,24 +77,22 @@ public class MovePlayer : MonoBehaviour {
         {
             transform.position = pos + new Vector3(dx,0,dz);
 
-        }
-        else
-        {
+        } else {
             // movement not enabled.
             trapHitCountdown -= Time.deltaTime;
-            if(trapHitCountdown<0)
-            {
+            if (trapHitCountdown < 0) {
                 enableMovement = true;
                 GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = false;
                 GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().StopPlayback();
                 Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
-            else
-            {
+            } else {
                 // shake camera
                 Camera.main.transform.rotation = Quaternion.Euler(Random.Range(0f, 1f), Random.Range(0f, 1f), 0);
             }
         }
+
+        if (Input.GetMouseButtonUp(0))
+            Debug.Log(transform.position);
 
     }
 

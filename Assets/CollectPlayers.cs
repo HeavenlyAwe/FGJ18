@@ -67,6 +67,7 @@ public class CollectPlayers : MonoBehaviour {
     public void startGame()
     {
         SceneManager.LoadScene("MainScene");
+        server.StartGame();
     }
 
     public string getRandomName()
