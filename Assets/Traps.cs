@@ -78,7 +78,7 @@ public class Traps : MonoBehaviour {
 
     }
 
-    void placeTrap(int userId, int trapId, float x, float z, string type)
+    public void placeTrap(int userId, int trapId, float x, float z, string type)
     {
         float timer = 2f; // should be taken from traptype!
         placedTraps.Add(new Trap(userId, trapId, x, z, type, timer));
