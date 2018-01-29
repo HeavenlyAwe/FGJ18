@@ -43,7 +43,7 @@ public class CeilingScript : MonoBehaviour {
                 if(index < 2) {
                         tmpGO = Instantiate(preFabs[index], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                         //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                        tmpGO.transform.parent = objectGO[index].transform;
+                        tmpGO.transform.parent = objectGO[0].transform;
                 } else {
                     //tmpGO = Instantiate(preFabs[3], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
