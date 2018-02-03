@@ -310,9 +310,9 @@ MonoBehaviour:
   preFabs:
   - {fileID: 1470485743000466, guid: 5ca93332db37b49d482ca4d3c1c6d75f, type: 2}
   - {fileID: 1657058541538368, guid: b8a33cdf82bbb4ebd849a0cb70b8b282, type: 2}
-  - {fileID: 0}
-  - {fileID: 1907187422989294, guid: 1ea0612d333edbd41b186058b2438bfa, type: 2}
-  - {fileID: 0}
+  - {fileID: 1065913871672672, guid: be0ef3fb3aa0a4a50962aa607e3e5c40, type: 2}
+  - {fileID: 1065913871672672, guid: be0ef3fb3aa0a4a50962aa607e3e5c40, type: 2}
+  - {fileID: 1948710456221806, guid: 326ffc5cefedc4a9ab4b835ab918c821, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -329,7 +329,7 @@ MonoBehaviour:
   - {fileID: 1368160785}
   - {fileID: 1368160785}
   - {fileID: 2125629912}
-  - {fileID: 0}
+  - {fileID: 1368160785}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -375,7 +375,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3083efedeb4b59741990baadda913c4c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a50dbc702da994c79a5f1198b33e0a4c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
