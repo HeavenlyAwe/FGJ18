@@ -31,12 +31,10 @@ public class FloorScript : MonoBehaviour {
                 //int colorInteger = colorMap[c[x+w*y]];
 				GameObject tmpGO;
 
-                //Debug.Log("HEJ");
-                //Debug.Log("COLOR: "+ c[x+w*y]);
+
                 int index = (int)(c[x+w*y].r / 16);
 
-                //Debug.Log(index);
-                //Debug.Log(preFabs(index));
+
 
                 if(index < 2) {
                         tmpGO = Instantiate(preFabs[index], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
