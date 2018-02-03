@@ -48,12 +48,27 @@ public class WallsScript : MonoBehaviour {
                     Debug.Log("x: " + x + ",y: " + y);
                     Debug.Log(c[x+w*y].r);
 
-                    tmpGO = Instantiate(preFabs[2], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
-                    //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                    tmpGO.transform.parent = objectGO[2].transform;
+                    if (x == 0) {
 
-                    tmpGO = Instantiate(preFabs[4], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
-                    tmpGO.transform.parent = objectGO[4].transform;
+                        tmpGO = Instantiate(preFabs[2], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.Euler(0,90,0));
+                        //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[2].transform;
+
+                        tmpGO = Instantiate(preFabs[4], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.Euler(0,90,0));
+                        tmpGO.transform.parent = objectGO[4].transform;
+                    } else {
+                        
+                        tmpGO = Instantiate(preFabs[2], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                        //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[2].transform;
+
+                        tmpGO = Instantiate(preFabs[4], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                        tmpGO.transform.parent = objectGO[4].transform;
+
+
+                    }
+
+                    
 
                 } else if (index == 3) {
 
