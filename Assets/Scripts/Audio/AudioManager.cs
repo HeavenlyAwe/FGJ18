@@ -73,6 +73,11 @@ public class AudioManager : MonoBehaviour
 			return;
 		}
 
+		if (high.source.isPlaying) {
+			Debug.Log ("Fully intensified");
+			return;
+		}
+
 		if (medium.source.isPlaying) {
 			float remainder = 3.75f - low.source.time % 3.75f;
 			high.source.time = medium.source.time + remainder;

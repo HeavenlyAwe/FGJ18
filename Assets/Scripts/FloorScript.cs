@@ -21,7 +21,6 @@ public class FloorScript : MonoBehaviour {
         int w = tex.width;
         int h = tex.height;
 
-        Debug.Log("level loader");
 
         Color32[] c = tex.GetPixels32();
 

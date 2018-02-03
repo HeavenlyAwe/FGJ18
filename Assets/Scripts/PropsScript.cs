@@ -21,7 +21,6 @@ public class PropsScript : MonoBehaviour {
         int w = tex.width;
         int h = tex.height;
 
-        Debug.Log("level loader");
 
         Color32[] c = tex.GetPixels32();
 
@@ -34,7 +33,6 @@ public class PropsScript : MonoBehaviour {
                 //Debug.Log("COLOR: "+ c[x+w*y]);
                 int index = (int)(c[x + w * y].r / 16);
 
-                Debug.Log(index);
                 //Debug.Log(preFabs(index));
 
                 if (index == 0) {
