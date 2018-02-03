@@ -6,7 +6,6 @@ public class AudioManager : MonoBehaviour
 {
 
 	public bool isAudioManagerForMenu;
-	private int numberOfTrapsDetonated; 
 
 
 	public Sound[] sounds;
@@ -29,7 +28,6 @@ public class AudioManager : MonoBehaviour
 		if (isAudioManagerForMenu) {
 			PlayMainMenuThemes();
 		} else {
-			numberOfTrapsDetonated = 0;
 			StartGameMusic();
 		}
 	}
