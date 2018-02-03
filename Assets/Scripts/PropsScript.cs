@@ -33,7 +33,6 @@ public class PropsScript : MonoBehaviour {
                 int index = (int)(c[x + w * y].r / 16);
 
 
-
                 if (index == 0) {
                     tmpGO = Instantiate(prefabs[0], new Vector3((float)(x * 0.2), 0, (float)(y * 0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
