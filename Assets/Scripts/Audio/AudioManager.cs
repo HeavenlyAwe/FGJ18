@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 
 	public bool isAudioManagerForMenu;
 	private int numberOfTrapsDetonated; 
-	private const int numberoftrapsbetweenDetonations = 5; 
+
 
 	public Sound[] sounds;
 
@@ -33,15 +33,7 @@ public class AudioManager : MonoBehaviour
 			StartGameMusic();
 		}
 	}
-
-	public void trapDetonated() {
-		numberOfTrapsDetonated++; 
-		if (numberOfTrapsDetonated == numberoftrapsbetweenDetonations) {
-			IntensifyGameThemeByTrap ();
-			numberOfTrapsDetonated = 0;
-		}
-
-	}
+		
 
 	//This method's here only for testing, shouldn't really do anything
 	public void Update() {
@@ -78,6 +70,11 @@ public class AudioManager : MonoBehaviour
 		if (low == null || medium == null || high == null)
 		{
 			Debug.LogWarning("Sounds for game theme not found!");
+			return;
+		}
+
+		if (high.source.isPlaying) {
+			Debug.Log ("Fully intensified");
 			return;
 		}
 
