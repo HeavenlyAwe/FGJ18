@@ -42,7 +42,6 @@ public class GetOutObjectiveScript : ObjectiveMission {
 		}
 
 		if (door != null) {
-			Debug.Log (Vector3.Distance (door.transform.position, player.position));
 			if (Vector3.Distance (door.transform.position, player.position) <= goalDistance) {
 				SetDone (true);
 				GetComponent<Image> ().enabled = true;
