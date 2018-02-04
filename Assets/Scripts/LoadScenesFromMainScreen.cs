@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LoadScenesFromMainScreen : MonoBehaviour {
 
-
     public void LoadCredits() {
-        SceneManager.LoadScene("CreditsScene");
+        SceneManager.LoadScene("CreditsScene", LoadSceneMode.Additive);
     }
 
     public void LoadInstructions() {
-        SceneManager.LoadScene("InstructionsScene");
+        SceneManager.LoadScene("InstructionsScene", LoadSceneMode.Additive);
     }
 }
