@@ -25,10 +25,6 @@ public class VialObjectiveScript : ObjectiveMission {
                     FindObjectOfType<AudioManager>().Play("CollectVial");
 					completedObjective = true;
 					MeshRenderer[] ms = vial.GetComponentsInChildren<MeshRenderer> ();
-					if (ms.Length != 1) {
-						Debug.Log (" Wrong length on rendererList " + ms.Length);
-						return; 
-					}
 					ms [0].enabled = false;
 					
             }

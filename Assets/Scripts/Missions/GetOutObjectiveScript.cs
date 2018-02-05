@@ -16,7 +16,7 @@ public class GetOutObjectiveScript : ObjectiveMission {
     public float goalDistance = 1.0f;
 
 	void Start() {
-		door = GameObject.Find ("door");
+		door = GameObject.Find ("office_door");
 	}
     	
 	// Update is called once per frame
@@ -27,9 +27,11 @@ public class GetOutObjectiveScript : ObjectiveMission {
                 done = false;
             }
         }
+
         if (done == false) {
             return;
         }
+
 
 		if (Input.GetKeyDown(KeyCode.U)) {
 			SetDone(true);
@@ -39,13 +41,14 @@ public class GetOutObjectiveScript : ObjectiveMission {
 			endGameScreens.GetComponent<EndGame>().winGame();
 		}
 
-		if (door != null)
-		if (Vector3.Distance(door.transform.position, player.position) <= goalDistance) {
-            SetDone(true);
-            GetComponent<Image>().enabled = true;
+		if (door != null) {
+			if (Vector3.Distance (door.transform.position, player.position) <= goalDistance) {
+				SetDone (true);
+				GetComponent<Image> ().enabled = true;
 
-            endGameScreens.SetActive(true);
-            endGameScreens.GetComponent<EndGame>().winGame();
-        }
+				endGameScreens.SetActive (true);
+				endGameScreens.GetComponent<EndGame> ().winGame ();
+			}
+		}
 	}
 }

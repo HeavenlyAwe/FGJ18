@@ -20,7 +20,7 @@ public class MovePlayer : MonoBehaviour {
     private Color32 cFloor = new Color32(255, 255, 255, 255);
 
 
-    private bool enableMovement = true;
+    private bool movementEnabled = true;
     private float trapHitCountdown;
 
     private float hitPadding = 2.5f;
@@ -64,8 +64,7 @@ public class MovePlayer : MonoBehaviour {
         int ix = (int)(x + dx + hitPadding * Mathf.Sign(dx));
         int iz = (int)(z + dz + hitPadding * Mathf.Sign(dz));
 
-        if(!isFloor(ix, (int)z))
-        {
+        if (!isFloor(ix, (int)z)) {
 
             // hit vertically
             dx = 0;
@@ -76,33 +75,27 @@ public class MovePlayer : MonoBehaviour {
             dz = 0;
         }
 
-        if (enableMovement)
-        {
-            transform.position = pos + new Vector3(dx,0,dz);
+        if (movementEnabled) {
+            transform.position = pos + new Vector3(dx, 0, dz);
 
         } else {
             // movement not enabled.
             trapHitCountdown -= Time.deltaTime;
             if (trapHitCountdown < 0) {
-                enableMovement = true;
+                // Reset the camera and disable the explosion
+                movementEnabled = true;
                 GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = false;
                 GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().StopPlayback();
-                Camera.main.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                Camera.main.transform.localRotation = Quaternion.Euler(10, 0, 0);
             } else {
                 // shake camera
-                Camera.main.transform.rotation = Quaternion.Euler(Random.Range(0f, 1f), Random.Range(0f, 1f), 0);
+                Camera.main.transform.localRotation = Quaternion.Euler(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
             }
         }
-
-        if (Input.GetMouseButtonUp(0))
-            Debug.Log(transform.position);
-
     }
 
-    bool isFloor(int x, int z)
-    {
-        if(x<0 || z<0 || x>=bitmapWidth || z>=bitmapHeight)
-        {
+    bool isFloor(int x, int z) {
+        if (x < 0 || z < 0 || x >= bitmapWidth || z >= bitmapHeight) {
             return false;
         }
         //return cFloor.Equals(bitmapColors[x + z * bitmapWidth]);
@@ -111,14 +104,12 @@ public class MovePlayer : MonoBehaviour {
         return bFloor;
     }
 
-    public void hitByTrap(Trap t, float dist)
-    {
+    public void hitByTrap(Trap t, float dist) {
         // get properties of the trap for use!!!
-        enableMovement = false;
+        movementEnabled = false;
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<SpriteRenderer>().enabled = true;
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().StartPlayback();
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<Animator>().speed = 2;
         trapHitCountdown = 1f; // dist; // is this right??? - propably not...
-
     }
 }
