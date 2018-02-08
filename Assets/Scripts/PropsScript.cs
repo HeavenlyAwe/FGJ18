@@ -49,6 +49,19 @@ public class PropsScript : MonoBehaviour {
                     tmpGO = Instantiate(prefabs[index], new Vector3((float)(x * 0.2), 0, (float)(y * 0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                     tmpGO.transform.parent = objectGO.transform;
+
+
+                } else if (index < 7) {
+                    if (c[(x+1) + w * y].r == 0) {
+                        Debug.Log("rotate poster");
+                    tmpGO = Instantiate(prefabs[index], new Vector3((float)(x * 0.2), 0, (float)(y * 0.2)), Quaternion.Euler(0,180,0));
+                    //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                    tmpGO.transform.parent = objectGO.transform;
+                    } else {
+                    tmpGO = Instantiate(prefabs[index], new Vector3((float)(x * 0.2), 0, (float)(y * 0.2)), Quaternion.identity);
+                    //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                    tmpGO.transform.parent = objectGO.transform;
+                    }
                 }
             }
         }
