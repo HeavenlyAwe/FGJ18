@@ -1,0 +1,22 @@
+[Production]
+Jeremias Berg
+
+[Code]
+Christoffer Fridlund; Network & Client Logic
+Adelina Lintuluoto;   Level Loading
+Tom Olander;          Player Movement & Trap Logic
+Paul Vuorela;         Music & SoundFX
+Jeremias Berg;        Git Conflicts
+
+[Sound]
+Paul Vuorela;         Music & SoundFX
+Dan Lindholm;         Music & SoundFX
+
+[Art]
+Mattias Lassheikki;   3D Modelling & LVL Design
+Meri Sillanpää;       3D Textures
+Christina Lassheikki; 2D Textures & UI Art
+Göran Maconi;         3D Modelling
+
+[]
+No rats where harmed during the production of this game
