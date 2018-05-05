@@ -56,25 +56,9 @@ public class MovePlayer : MonoBehaviour {
 
         Vector3 rot = transform.rotation.eulerAngles;
 
-        float x = pos.x * 5f - .5f;
-        float z = pos.z * 5f - .5f;
         float dx = dPos.x;
         float dz = dPos.z;
-        int ix = (int)(x + dx + hitPadding * Mathf.Sign(dx));
-        int iz = (int)(z + dz + hitPadding * Mathf.Sign(dz));
 
-     /*
-        if (!isFloor(ix, (int)z)) {
-
-            // hit vertically
-            dx = 0;
-        }
-
-        if (!isFloor((int)x, iz)) {
-            // hit horizontally
-            dz = 0;
-        }
-*/
         if (movementEnabled) {
             transform.position = pos + new Vector3(dx, 0, dz);
 
@@ -94,15 +78,6 @@ public class MovePlayer : MonoBehaviour {
         }
     }
 
-    bool isFloor(int x, int z) {
-        if (x < 0 || z < 0 || x >= bitmapWidth || z >= bitmapHeight) {
-            return false;
-        }
-        //return cFloor.Equals(bitmapColors[x + z * bitmapWidth]);
-        byte rComp = bitmapColors[x + z * bitmapWidth].r;
-        bool bFloor = rComp > 48;
-        return bFloor;
-    }
 
     public void hitByTrap(Trap t, float dist) {
         // get properties of the trap for use!!!
