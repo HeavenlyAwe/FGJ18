@@ -43,8 +43,7 @@ public class MovePlayer : MonoBehaviour {
 
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
-
-        if (vert != 0) {
+        if (System.Math.Abs(vert) > 0) {
             FindObjectOfType<AudioManager>().PlayWithoutDuplicate("FootSteps");
         }
 
@@ -64,6 +63,7 @@ public class MovePlayer : MonoBehaviour {
         int ix = (int)(x + dx + hitPadding * Mathf.Sign(dx));
         int iz = (int)(z + dz + hitPadding * Mathf.Sign(dz));
 
+     /*
         if (!isFloor(ix, (int)z)) {
 
             // hit vertically
@@ -74,7 +74,7 @@ public class MovePlayer : MonoBehaviour {
             // hit horizontally
             dz = 0;
         }
-
+*/
         if (movementEnabled) {
             transform.position = pos + new Vector3(dx, 0, dz);
 

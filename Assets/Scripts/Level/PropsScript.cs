@@ -21,7 +21,6 @@ public class PropsScript : MonoBehaviour {
         int w = tex.width;
         int h = tex.height;
 
-
         Color32[] c = tex.GetPixels32();
 
         for (int x = 0; x < w; x++) {
