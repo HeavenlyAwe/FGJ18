@@ -12,8 +12,8 @@ public class CreditsContainerScript : MonoBehaviour {
     private float canvasMax;
     private float offset;
 
-    private Color headerTextColor;
-    private Color headerTextColorTransparent;
+    //private Color headerTextColor;
+    //private Color headerTextColorTransparent;
 
     public CreditsContainerScript() {
         this.creditEntries = new List<CreditsEntryScript>();
@@ -26,8 +26,8 @@ public class CreditsContainerScript : MonoBehaviour {
         this.canvasMax = max;
         this.offset = offset;
 
-        headerTextColor = headerText.color;
-        headerTextColorTransparent = new Color(headerTextColor.r, headerTextColor.g, headerTextColor.b, 0.0f);
+        //headerTextColor = headerText.color;
+        //headerTextColorTransparent = new Color(headerTextColor.r, headerTextColor.g, headerTextColor.b, 0.0f);
     }
 
     public void AddEntry(CreditsEntryScript entry) {

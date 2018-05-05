@@ -9,14 +9,14 @@ public class LevelController : MonoBehaviour {
 
     public Sprite[] levelBitmaps;
 
-    private MovePlayer mp;
+    //private MovePlayer mp;
 
     bool paused;
 
 	// Use this for initialization
 	void Start () {
         level = 0;
-        mp = GameObject.FindGameObjectWithTag("Player").GetComponent<MovePlayer>();
+        //mp = GameObject.FindGameObjectWithTag("Player").GetComponent<MovePlayer>();
 
         paused = false;
     }

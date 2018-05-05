@@ -20,7 +20,7 @@ public class Server : MonoBehaviour {
     private int webHostId;
 
     private int reliableChannel;
-    private int unReliableChannel;
+    //private int unReliableChannel;
 
     private bool isStarted = false;
 
@@ -46,7 +46,7 @@ public class Server : MonoBehaviour {
         ConnectionConfig config = new ConnectionConfig();
 
         reliableChannel = config.AddChannel(QosType.Reliable);
-        unReliableChannel = config.AddChannel(QosType.Unreliable);
+        //unReliableChannel = config.AddChannel(QosType.Unreliable);
 
         HostTopology topology = new HostTopology(config, MAX_CONNECTION);
 
@@ -74,6 +74,7 @@ public class Server : MonoBehaviour {
         int dataSize;
         byte error;
         NetworkEventType recData = NetworkTransport.Receive(out recHostId, out connectionId, out channelId, recBuffer, bufferSize, out dataSize, out error);
+        //Debug.Log("Server error code: " + error);
         switch (recData) {
             //case NetworkEventType.Nothing:         //1
             //    break;
@@ -159,7 +160,7 @@ public class Server : MonoBehaviour {
         float z = float.Parse(data[1]);
         Debug.Log("Ratio: " + x / 96f + " : " + z / 96f);
         //traps.placeTrap(connectionId, trapId, x, z, trapType);
-        trapManager.PlaceTrap(connectionId, trapId, trapType, new Vector3(x, 0, z));
+        trapManager.PlaceTrap(connectionId, trapId, trapType, new Vector3(x, 1.0f, z));
     }
 
     private void OnClientActivateTrap(int connectionId, int trapId) {
@@ -178,6 +179,7 @@ public class Server : MonoBehaviour {
         byte[] messageBuffer = Encoding.Unicode.GetBytes(message);
         foreach (ServerClient client in clients) {
             NetworkTransport.Send(hostId, client.connectionId, channelId, messageBuffer, message.Length * sizeof(char), out error);
+            //Debug.Log("Server error code: " + error);
         }
     }
 

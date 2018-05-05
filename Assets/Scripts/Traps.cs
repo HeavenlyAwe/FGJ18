@@ -99,7 +99,7 @@ public class Traps : MonoBehaviour {
         if (dist < 25f)
         {
             // Hit by trap
-            player.GetComponent<MovePlayer>().hitByTrap(t, dist);
+            //player.GetComponent<MovePlayer>().hitByTrap(t, dist);
         }
         // add detonated trap to removelist
         removeTraps.Add(idx);

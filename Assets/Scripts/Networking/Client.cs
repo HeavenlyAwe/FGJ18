@@ -22,11 +22,11 @@ public class Client : MonoBehaviour {
     private int webHostId;
 
     private int reliableChannel;
-    private int unReliableChannel;
+    //private int unReliableChannel;
 
     private bool isConnected = false;
-    private bool isStarted = false;
-    private float connectionTime;
+    //private bool isStarted = false;
+    //private float connectionTime;
 
     private byte error;
 
@@ -63,14 +63,15 @@ public class Client : MonoBehaviour {
         ConnectionConfig config = new ConnectionConfig();
 
         reliableChannel = config.AddChannel(QosType.Reliable);
-        unReliableChannel = config.AddChannel(QosType.Unreliable);
+        //unReliableChannel = config.AddChannel(QosType.Unreliable);
 
         HostTopology topology = new HostTopology(config, MAX_CONNECTION);
 
         hostId = NetworkTransport.AddHost(topology, 0);
 
         connectionId = NetworkTransport.Connect(hostId, ipAddress, port, 0, out error);
-        connectionTime = Time.time;
+        //Debug.Log("Client error code: " + error);
+        //connectionTime = Time.time;
         isConnected = true;
 
         Debug.Log("Connected!");

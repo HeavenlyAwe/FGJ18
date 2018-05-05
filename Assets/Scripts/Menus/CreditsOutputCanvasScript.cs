@@ -106,8 +106,8 @@ public class CreditsOutputCanvasScript : MonoBehaviour {
         return creditEntries;
     }
 
-    private int containerIndex = 0;
-    private int containerIndex2 = 1;
+    //private int containerIndex = 0;
+    //private int containerIndex2 = 1;
 
     private Queue<int> containerIndices = new Queue<int>();
 
@@ -131,6 +131,7 @@ public class CreditsOutputCanvasScript : MonoBehaviour {
         if (container.transform.localPosition.y >= (canvas.sizeDelta.y + container.GetComponent<RectTransform>().sizeDelta.y) / 2) {
             container.transform.localPosition = new Vector3(0, -(canvas.sizeDelta.y + container.GetComponent<RectTransform>().sizeDelta.y) / 2, 0);
             int index = containerIndices.Dequeue();
+            Debug.Log("RemoveContainerIndex: " + index);
         }
     }
 
