@@ -26,7 +26,6 @@ public class PropsScript : MonoBehaviour {
 
         for (int x = 0; x < w; x++) {
             for (int y = 0; y < h; y++) {
-                //int colorInteger = colorMap[c[x+w*y]];
                 GameObject tmpGO;
 
 
@@ -37,15 +36,17 @@ public class PropsScript : MonoBehaviour {
                     tmpGO = Instantiate(prefabs[0], new Vector3((float)(x * 0.2), 0, (float)(y * 0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                     tmpGO.transform.parent = objectGO.transform;
-                } else if (index == 1) {
-                    GameObject door = new GameObject();
-                    door.transform.position = new Vector3(x * 0.2f, 0, y * 0.2f);
-                    door.transform.parent = objectGO.transform;
-                    door.transform.name = "door";
-                    //tmpGO = Instantiate(preFabs[1], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
-                    //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
-                    //tmpGO.transform.parent = objectGO[1].transform;
+                    Debug.Log("vial");
+                // } else if (index == 1) {
+                //     GameObject door = new GameObject();
+                //     door.transform.position = new Vector3(x * 0.2f, 0, y * 0.2f);
+                //     door.transform.parent = objectGO.transform;
+                //     door.transform.name = "door";
+                //     //tmpGO = Instantiate(preFabs[1], new Vector3((float)(x*0.2), 0, (float)(y*0.2)), Quaternion.identity);
+                //     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
+                //     //tmpGO.transform.parent = objectGO[1].transform;
                 } else if (index < 6) {
+                    Debug.Log(index);
                     tmpGO = Instantiate(prefabs[index], new Vector3((float)(x * 0.2), 0, (float)(y * 0.2)), Quaternion.identity);
                     //tmpGO = Instantiate(preFabs[colorInteger], new Vector3(x, 0, y), Quaternion.identity);
                     tmpGO.transform.parent = objectGO.transform;
