@@ -30,7 +30,9 @@ public class Server : MonoBehaviour {
 
     public List<ServerClient> clientList;
 
-    public Traps traps;
+    //public Traps traps;
+
+    public TrapManager trapManager;
 
     void Awake() {
         DontDestroyOnLoad(transform.gameObject);
@@ -156,11 +158,13 @@ public class Server : MonoBehaviour {
         float x = float.Parse(data[0]);
         float z = float.Parse(data[1]);
         Debug.Log("Ratio: " + x / 96f + " : " + z / 96f);
-        traps.placeTrap(connectionId, trapId, x, z, trapType);
+        //traps.placeTrap(connectionId, trapId, x, z, trapType);
+        trapManager.PlaceTrap(connectionId, trapId, trapType, new Vector3(x, 0, z));
     }
 
     private void OnClientActivateTrap(int connectionId, int trapId) {
-        traps.activateTrap(connectionId, trapId);
+        //traps.activateTrap(connectionId, trapId);
+        trapManager.ActivateTrap(connectionId, trapId);
     }
 
     private void Send(string message, int channelId, int connectionId) {
@@ -192,6 +196,11 @@ public class Server : MonoBehaviour {
 
     public int getPort() {
         return port;
+    }
+
+
+    public void SetTrapManager(TrapManager trapManager) {
+        this.trapManager = trapManager;
     }
 
 }
