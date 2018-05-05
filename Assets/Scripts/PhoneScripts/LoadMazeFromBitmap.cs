@@ -7,6 +7,8 @@ public class LoadMazeFromBitmap : MonoBehaviour {
     public SpriteRenderer maze;
     public RectTransform gamePanel;
 
+    public Sprite mazeSprite;
+
     void Start() {
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
