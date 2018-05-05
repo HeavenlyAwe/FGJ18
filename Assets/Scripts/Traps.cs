@@ -61,15 +61,19 @@ public class Traps : MonoBehaviour {
                 enableTrapPlacement = true;
             }
         }
+
         for(int idx = 0; idx<placedTraps.Count; idx++) 
         {
             Trap t = placedTraps[idx];
-            t.timer -= Time.deltaTime;
-            if(t.activated && t.timer<0) {
-                // KABOOM!!!!
-                detonateTrap(t, idx);
+            if (t.activated) {
+                t.timer -= Time.deltaTime;
+                if (t.timer < 0) {
+                    // KABOOM!!!!
+                    detonateTrap(t, idx);
+                }
             }
         }
+
         // remove detonated traps
         //Debug.Log("count: " + removeTraps.Count);
         for (int idx = 0; idx < removeTraps.Count; idx++)
@@ -111,7 +115,6 @@ public class Traps : MonoBehaviour {
             {
                 t.activated = true;
                 FindObjectOfType<AudioManager>().PlayFromLocation("BombBeeps", new Vector3(t.x,0,t.z));
-
             }
         }
     }
