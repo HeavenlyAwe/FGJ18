@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4815538567442746}
   - component: {fileID: 33177550473466724}
   - component: {fileID: 23082004489542786}
+  - component: {fileID: 65533974263079164}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -113,6 +114,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 2ccf0da64f0484fde9b3d37eb13e1a0f, type: 2}
   m_StaticBatchInfo:
@@ -141,6 +143,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278615392392176}
   m_Mesh: {fileID: 4300000, guid: 5ed16ff900090d64a889692fd59e9ab0, type: 3}
+--- !u!65 &65533974263079164
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278615392392176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.3, z: 0.2}
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!95 &95133368564217596
 Animator:
   serializedVersion: 3
@@ -158,3 +172,4 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
