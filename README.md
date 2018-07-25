@@ -2,9 +2,9 @@
 Finnish Game Jam 2018 - Laborinth
 
 The original game submission can be found at https://globalgamejam.org/2018/games/laborinth?token=1532543123
-The credits of that game are as follows
+The credits of that game are as follows<br>
 
-[Production]
+[Production]<br>
 Jeremias Berg
 
 [Code]
