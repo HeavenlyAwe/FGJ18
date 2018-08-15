@@ -28,6 +28,6 @@ The game in this repository is a slightly improved version of the original game 
 This version loads and runs better than the jam submission and includes some more assets that were cut from the 
 jam submission due to time constraints. 
 
-The refactoring and code improvements have mainly been done by Jeremias, Christodder and Adelina. 
+The refactoring and code improvements have mainly been done by Jeremias, Christoffer and Adelina. 
 
 No rats where harmed during the production of this game
